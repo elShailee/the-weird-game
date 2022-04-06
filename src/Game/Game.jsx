@@ -1,25 +1,21 @@
-import { chaptersLib } from 'Chapters/utils';
+import { chaptersLib } from 'Chapters/chaptersLib';
 import { ChaptersContext } from 'Context/ChaptersContext';
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
+import { useNextChapterIndex } from 'Utils/useNextChapterIndex';
 
-export default function Game() {
-	const chapter = useContext(ChaptersContext);
-	const chapterName = chapter.name;
-	const ChapterComponent = chaptersLib[chapterName];
-	const next = () => {
-		if (chapterName < Object.keys(chaptersLib).length) {
-			chapter.setChapter(chapterName + 1);
-		} else {
-			chapter.setChapter(0);
-		}
-	};
+export const Game = () => {
+	const { currentChapterIndex, setCurrentChapterByIndex } = useContext(ChaptersContext);
+
+	const ChapterComponent = useMemo(() => {
+		return chaptersLib[currentChapterIndex];
+	}, [currentChapterIndex]);
+
+	const nextIndex = useNextChapterIndex();
 
 	return (
 		<>
 			{ChapterComponent ? <ChapterComponent /> : <div>Game</div>}
-			<button onClick={next}>Next Chapter</button>
-			<button>asdasd</button>
-			asdasdasd
+			<button onClick={() => setCurrentChapterByIndex(nextIndex)}>Next Chapter</button>
 		</>
 	);
-}
+};
