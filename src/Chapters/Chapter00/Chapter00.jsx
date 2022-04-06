@@ -4,7 +4,7 @@ import { useNextChapterIndex } from 'Utils/useNextChapterIndex';
 import { useTimeouts } from 'Utils/useTimeout-s';
 import { IntroductionScreen } from './IntroductionScreen';
 import { ScareScreen } from './ScareScreen';
-import { WelcomeScreen } from './WelcomeScreen';
+import { WelcomeScreen, duration as welcomeDuration } from './WelcomeScreen';
 
 export const Chapter00 = () => {
 	const [contentState, setContentState] = useState(<ScareScreen />);
@@ -23,7 +23,7 @@ export const Chapter00 = () => {
 				setContentState(<IntroductionScreen nextChapter={nextChapter} />);
 			},
 		],
-		[500, 2000],
+		[100, welcomeDuration],
 	);
 	return contentState;
 };

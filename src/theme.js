@@ -1,4 +1,4 @@
-// import palette from 'palette';
+import palette from 'palette';
 
 export const theme = {
 	sizes: {
@@ -36,7 +36,14 @@ export const theme = {
 			top: 0;
 			width: 100vw;
 			height: 100vh;
+			box-sizing: border-box;
 		`,
 	},
-	colors: {},
+	colors: {
+		chapter00: {
+			welcomeScreenBG: palette.red[950],
+			introScreenBG: palette.gray[200],
+			introScreenText: palette.gray[700],
+		},
+	},
 };
