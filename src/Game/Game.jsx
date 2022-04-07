@@ -1,13 +1,7 @@
-import { chaptersLib } from 'Chapters/chaptersLib';
-import { ChaptersContext } from 'Context/ChaptersContext';
-import { useContext, useMemo } from 'react';
+import { useCurrentChapter } from 'Utils/chaptersUtils';
 
 export const Game = () => {
-	const { currentChapterIndex } = useContext(ChaptersContext);
+	const ChapterComponent = useCurrentChapter();
 
-	const ChapterComponent = useMemo(() => {
-		return chaptersLib[currentChapterIndex];
-	}, [currentChapterIndex]);
-
-	return <>{ChapterComponent ? <ChapterComponent /> : <div>Game</div>}</>;
+	return <>{ChapterComponent ? <ChapterComponent /> : <div>Game Fallback</div>}</>;
 };

@@ -1,4 +1,4 @@
-import { useState, createContext } from 'react';
+import { useState, createContext, useContext } from 'react';
 
 export const ChaptersContext = createContext();
 
@@ -11,3 +11,5 @@ export function ChaptersProvider(props) {
 		</ChaptersContext.Provider>
 	);
 }
+
+export const useChaptersContext = () => useContext(ChaptersContext);

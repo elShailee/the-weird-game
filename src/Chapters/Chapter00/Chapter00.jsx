@@ -1,6 +1,6 @@
-import { ChaptersContext } from 'Context/ChaptersContext';
-import { useContext, useState } from 'react';
-import { useNextChapterIndex } from 'Utils/useNextChapterIndex';
+import { useState } from 'react';
+import { useChaptersContext } from 'Context/ChaptersContext';
+import { useNextChapterIndex } from 'Utils/chaptersUtils';
 import { useTimeouts } from 'Utils/useTimeoutAndTimeouts';
 import { IntroductionScreen } from './IntroductionScreen';
 import { ScareScreen } from './ScareScreen';
@@ -8,9 +8,9 @@ import { WelcomeScreen, duration as welcomeDuration } from './WelcomeScreen';
 
 export const Chapter00 = () => {
 	const [contentState, setContentState] = useState(<ScareScreen />);
-	const { setCurrentChapterByIndex } = useContext(ChaptersContext);
+	const { setCurrentChapterByIndex } = useChaptersContext();
 	const nextChapterIndex = useNextChapterIndex();
-	const nextChapter = () => {
+	const chapterSkip = () => {
 		setCurrentChapterByIndex(nextChapterIndex);
 	};
 
@@ -20,7 +20,7 @@ export const Chapter00 = () => {
 				setContentState(<WelcomeScreen />);
 			},
 			() => {
-				setContentState(<IntroductionScreen nextChapter={nextChapter} />);
+				setContentState(<IntroductionScreen chapterSkip={chapterSkip} />);
 			},
 		],
 		[100, welcomeDuration],
