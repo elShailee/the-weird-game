@@ -1,8 +1,8 @@
 import { useSpring } from 'react-spring';
 import { WelcomeScreenContainer, ChapterIndtoductionContainer } from './styles';
 
-const animationDelay = 1500;
-const animationDuration = 1000;
+const animationDelay = 3000;
+const animationDuration = 1500;
 
 export const duration = animationDelay + animationDuration;
 

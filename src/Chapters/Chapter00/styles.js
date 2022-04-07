@@ -32,3 +32,9 @@ export const ChapterIndtoductionContainer = styled(animated.div)`
 	font-size: 2rem;
 	font-family: ${({ theme }) => theme.fonts.primary};
 `;
+
+export const ClickHintContainer = styled(animated.div)`
+	font-size: 1rem;
+	margin-top: 0.5rem;
+	letter-spacing: 0.07rem;
+`;
