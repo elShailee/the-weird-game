@@ -5,10 +5,6 @@ export const ScareTextContainer = styled.div`
 	${({ theme }) => theme.customStyles.screenSized}
 	${({ theme }) => theme.customStyles.centerItems}
 	${({ theme }) => theme.customStyles.nonSelectable}
-`;
-
-export const SacreText = styled.div`
-	width: fit-content;
 	font-size: ${({ theme }) => theme.sizes.text.L};
 `;
 
