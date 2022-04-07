@@ -1,10 +1,13 @@
+import { useChaptersContext } from 'Context/ChaptersContext';
 import { useState } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { ChapterIndtoductionContainer, ClickHintContainer } from './styles';
 
-export const IntroductionScreen = ({ chapterSkip }) => {
+export const IntroductionScreen = () => {
 	const [introductionStage, setIntroductionStage] = useState(0);
 	const [isTextFadingOutState, setIsTextFadingOutState] = useState(false);
+	const { skipChapter } = useChaptersContext();
+
 	const textFadeDuration = 500;
 	const clickHintAnimationDelay = 4000;
 
@@ -44,7 +47,7 @@ export const IntroductionScreen = ({ chapterSkip }) => {
 		setIsTextFadingOutState(true);
 		setTimeout(() => {
 			if (introductionStage === 3) {
-				chapterSkip();
+				skipChapter();
 			} else {
 				setIntroductionStage(introductionStage + 1);
 			}
