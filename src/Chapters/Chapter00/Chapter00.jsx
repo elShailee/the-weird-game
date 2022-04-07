@@ -1,7 +1,7 @@
 import { ChaptersContext } from 'Context/ChaptersContext';
 import { useContext, useState } from 'react';
 import { useNextChapterIndex } from 'Utils/useNextChapterIndex';
-import { useTimeouts } from 'Utils/useTimeout-s';
+import { useTimeouts } from 'Utils/useTimeoutAndTimeouts';
 import { IntroductionScreen } from './IntroductionScreen';
 import { ScareScreen } from './ScareScreen';
 import { WelcomeScreen, duration as welcomeDuration } from './WelcomeScreen';

@@ -6,10 +6,18 @@ export const theme = {
 		borderRadius: {
 			Max: '50%',
 		},
-		padding: {},
-		text: {},
-		buttonsHeight: {},
-		icons: {},
+		padding: {
+			L: '1rem',
+			M: '0.5rem',
+		},
+		text: {
+			XL: '3rem',
+			L: '2rem',
+			S: '1rem',
+		},
+		letterSpacing: {
+			L: '0.07rem',
+		},
 	},
 	fonts: {
 		primary: "'Noto Serif', serif",
@@ -30,7 +38,7 @@ export const theme = {
 		clickable: `
 			cursor: pointer;
 		`,
-		isAScreen: `
+		screenSized: `
 			position: absolute;
 			left: 0;
 			top: 0;
