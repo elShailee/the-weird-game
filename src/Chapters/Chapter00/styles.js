@@ -1,7 +1,7 @@
 import { animated } from 'react-spring';
 import styled from 'styled-components';
 
-export const ScareTextContainer = styled.div`
+export const HiddenMessageTextContainer = styled.div`
 	${({ theme }) => theme.customStyles.screenSized}
 	${({ theme }) => theme.customStyles.centerItems}
 	${({ theme }) => theme.customStyles.nonSelectable}
@@ -18,7 +18,7 @@ export const WelcomeScreenContainer = styled(animated.div)`
 	font-size: ${({ theme }) => theme.sizes.text.XL};
 `;
 
-export const ChapterIndtoductionContainer = styled(animated.div)`
+export const IntroductionScreenContainer = styled(animated.div)`
 	${({ theme }) => theme.customStyles.screenSized}
 	${({ theme }) => theme.customStyles.centerItems}
 	${({ theme }) => theme.customStyles.nonSelectable}

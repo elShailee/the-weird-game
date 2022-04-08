@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useTimeouts } from 'Utils/useTimeoutAndTimeouts';
 import { IntroductionScreen } from './IntroductionScreen';
-import { ScareScreen } from './ScareScreen';
+import { HiddenMessageScreen } from './HiddenMessageScreen';
 import { WelcomeScreen, duration as welcomeDuration } from './WelcomeScreen';
 
 export const Chapter00 = () => {
-	const [contentState, setContentState] = useState(<ScareScreen />);
+	const [contentState, setContentState] = useState(<HiddenMessageScreen />);
 
 	useTimeouts(
 		[

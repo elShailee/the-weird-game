@@ -1,5 +1,5 @@
 import { useSpring } from 'react-spring';
-import { WelcomeScreenContainer, ChapterIndtoductionContainer } from './styles';
+import { WelcomeScreenContainer, IntroductionScreenContainer } from './styles';
 
 const animationDelay = 3000;
 const animationDuration = 1500;
@@ -16,7 +16,7 @@ export const WelcomeScreen = () => {
 
 	return (
 		<>
-			<ChapterIndtoductionContainer />
+			<IntroductionScreenContainer />
 			<WelcomeScreenContainer style={fadingAnimation}>
 				Welcome to
 				<br />

@@ -1,10 +1,10 @@
 import { useChaptersContext } from 'Context/ChaptersContext';
 import { useState } from 'react';
 import { useSpring, animated } from 'react-spring';
-import { ChapterIndtoductionContainer, ClickHintContainer } from './styles';
+import { IntroductionScreenContainer, ClickHintContainer } from './styles';
 
 export const IntroductionScreen = () => {
-	const [introductionStage, setIntroductionStage] = useState(0);
+	const [introductionStageState, setIntroductionStageState] = useState(0);
 	const [isTextFadingOutState, setIsTextFadingOutState] = useState(false);
 	const { skipChapter } = useChaptersContext();
 
@@ -46,20 +46,20 @@ export const IntroductionScreen = () => {
 	const clickHandler = () => {
 		setIsTextFadingOutState(true);
 		setTimeout(() => {
-			if (introductionStage === 3) {
+			if (introductionStageState === 3) {
 				skipChapter();
 			} else {
-				setIntroductionStage(introductionStage + 1);
+				setIntroductionStageState(introductionStageState + 1);
 			}
 			setIsTextFadingOutState(false);
 		}, textFadeDuration);
 	};
 
 	return (
-		<ChapterIndtoductionContainer onClick={clickHandler}>
+		<IntroductionScreenContainer onClick={clickHandler}>
 			<animated.div style={mainTextFadeInAnimation}>
-				{introductionTexts[introductionStage]}
+				{introductionTexts[introductionStageState]}
 			</animated.div>
-		</ChapterIndtoductionContainer>
+		</IntroductionScreenContainer>
 	);
 };
