@@ -10,6 +10,7 @@ export const IntroductionScreen = () => {
 	const [isTextFadingOutState, setIsTextFadingOutState] = useState(false);
 	const { skipChapter } = useChaptersContext();
 
+	// animations
 	const textFadeDuration = 500;
 	const clickHintAnimationDelay = 4000;
 
@@ -27,25 +28,19 @@ export const IntroductionScreen = () => {
 		delay: clickHintAnimationDelay,
 	});
 
+	// texts
 	const introductionTexts = useTextsContext().chapter00.introduction;
 	const mountableTextsInstance = useMemo(() => {
-		console.log(introductionTexts);
 		const instanceTexts = pickRandomObjectFromArray(introductionTexts.dialogsSelection);
-		instanceTexts[0] = (
-			<>
-				{instanceTexts[0]}
-				<ClickHintContainer style={clickHintFadeInAnimation}>
-					{introductionTexts.clickHint}
-				</ClickHintContainer>
-			</>
-		);
 		return instanceTexts;
-	}, [clickHintFadeInAnimation, introductionTexts]);
+	}, [introductionTexts]);
 
+	// clickHandler
 	const clickHandler = () => {
 		setIsTextFadingOutState(true);
 		setTimeout(() => {
-			if (introductionStageState === 3) {
+			const hasDisplayedAllTexts = introductionStageState === mountableTextsInstance.length - 1;
+			if (hasDisplayedAllTexts) {
 				skipChapter();
 			} else {
 				setIntroductionStageState(introductionStageState + 1);
@@ -58,6 +53,11 @@ export const IntroductionScreen = () => {
 		<IntroductionScreenContainer onClick={clickHandler}>
 			<animated.div style={mainTextFadeInAnimation}>
 				{mountableTextsInstance[introductionStageState]}
+				{introductionStageState === 0 && (
+					<ClickHintContainer style={clickHintFadeInAnimation}>
+						{introductionTexts.clickHint}
+					</ClickHintContainer>
+				)}
 			</animated.div>
 		</IntroductionScreenContainer>
 	);
