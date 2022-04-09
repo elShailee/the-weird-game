@@ -1,3 +1,4 @@
+import { useTextsContext } from 'Context/TextsContext';
 import { useSpring } from 'react-spring';
 import { WelcomeScreenContainer, IntroductionScreenContainer } from './styles';
 
@@ -14,14 +15,12 @@ export const WelcomeScreen = () => {
 		delay: animationDelay,
 	});
 
+	const welcomeText = useTextsContext().chapter00.welcome;
+
 	return (
 		<>
 			<IntroductionScreenContainer />
-			<WelcomeScreenContainer style={fadingAnimation}>
-				Welcome to
-				<br />
-				The Weird Game
-			</WelcomeScreenContainer>
+			<WelcomeScreenContainer style={fadingAnimation}>{welcomeText}</WelcomeScreenContainer>
 		</>
 	);
 };

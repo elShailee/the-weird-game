@@ -1,6 +1,8 @@
 import { useChaptersContext } from 'Context/ChaptersContext';
-import { useState } from 'react';
+import { useTextsContext } from 'Context/TextsContext';
+import { useMemo, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
+import { pickRandomObjectFromArray } from 'Utils/arraysUtils';
 import { IntroductionScreenContainer, ClickHintContainer } from './styles';
 
 export const IntroductionScreen = () => {
@@ -25,23 +27,20 @@ export const IntroductionScreen = () => {
 		delay: clickHintAnimationDelay,
 	});
 
-	const introductionTexts = [
-		<>
-			<div>
-				It's not like <br /> WEIRD-weird...
-			</div>
-			<ClickHintContainer style={clickHintFadeInAnimation}>
-				(this is when you click...)
-			</ClickHintContainer>
-		</>,
-		<div>
-			it's more like, <br /> dads humor weird
-		</div>,
-		<div>
-			Anyway, <br /> do you wanna play a game?
-		</div>,
-		<div>sorry, I'll work on that...</div>,
-	];
+	const introductionTexts = useTextsContext().chapter00.introduction;
+	const mountableTextsInstance = useMemo(() => {
+		console.log(introductionTexts);
+		const instanceTexts = pickRandomObjectFromArray(introductionTexts.dialogsSelection);
+		instanceTexts[0] = (
+			<>
+				{instanceTexts[0]}
+				<ClickHintContainer style={clickHintFadeInAnimation}>
+					{introductionTexts.clickHint}
+				</ClickHintContainer>
+			</>
+		);
+		return instanceTexts;
+	}, [clickHintFadeInAnimation, introductionTexts]);
 
 	const clickHandler = () => {
 		setIsTextFadingOutState(true);
@@ -58,7 +57,7 @@ export const IntroductionScreen = () => {
 	return (
 		<IntroductionScreenContainer onClick={clickHandler}>
 			<animated.div style={mainTextFadeInAnimation}>
-				{introductionTexts[introductionStageState]}
+				{mountableTextsInstance[introductionStageState]}
 			</animated.div>
 		</IntroductionScreenContainer>
 	);

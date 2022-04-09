@@ -25,7 +25,7 @@ export const theme = {
 	customStyles: {
 		centerItems: `	
 			display: flex;
-			flex-direction: row;
+			flex-direction: column;
 			align-items: center;
 			justify-content: center;
 			text-align: center;
