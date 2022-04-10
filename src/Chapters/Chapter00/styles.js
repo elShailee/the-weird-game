@@ -6,6 +6,7 @@ export const HiddenMessageTextContainer = styled.div`
 	${({ theme }) => theme.customStyles.centerItems}
 	${({ theme }) => theme.customStyles.nonSelectable}
 	font-size: ${({ theme }) => theme.sizes.text.L};
+	font-family: ${({ theme }) => theme.fonts.primary};
 `;
 
 export const WelcomeScreenContainer = styled(animated.div)`

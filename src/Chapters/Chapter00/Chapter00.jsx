@@ -5,7 +5,7 @@ import { HiddenMessageScreen } from './HiddenMessageScreen';
 import { WelcomeScreen } from './WelcomeScreen';
 
 export const Chapter00 = () => {
-	const [contentState, setContentState] = useState(<HiddenMessageScreen />);
+	const [screenState, setScreenState] = useState(<HiddenMessageScreen />);
 
 	const welcomeAnimationTimings = {
 		duration: 1500,
@@ -17,13 +17,14 @@ export const Chapter00 = () => {
 	useTimeouts(
 		[
 			() => {
-				setContentState(<WelcomeScreen animationTimings={welcomeAnimationTimings} />);
+				setScreenState(<WelcomeScreen animationTimings={welcomeAnimationTimings} />);
 			},
 			() => {
-				setContentState(<IntroductionScreen />);
+				setScreenState(<IntroductionScreen />);
 			},
 		],
 		[100, totalWelcomeAnimationDuration],
 	);
-	return contentState;
+
+	return screenState;
 };

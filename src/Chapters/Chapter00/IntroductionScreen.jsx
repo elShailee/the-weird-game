@@ -7,7 +7,7 @@ import Lodash from 'lodash';
 import { IntroductionScreenContainer, ClickHintContainer } from './styles';
 
 export const IntroductionScreen = () => {
-	const [introductionStageState, setIntroductionStageState] = useState(0);
+	const [dialogLineIndexState, setDialogLineIndexState] = useState(0);
 	const [isTextFadingOutState, setIsTextFadingOutState] = useState(false);
 	const { skipChapter } = useChaptersContext();
 
@@ -15,36 +15,41 @@ export const IntroductionScreen = () => {
 	const textFadeDuration = 500;
 	const clickHintAnimationDelay = 4000;
 
-	const basicFadeInAnimationObject = {
+	const basicFadeAnimationObject = {
 		from: { opacity: 0 },
 		to: { opacity: 1 },
 		config: { duration: textFadeDuration },
 	};
-	const mainTextFadeInAnimation = useSpring({
-		...basicFadeInAnimationObject,
+	const mainTextFadeAnimation = useSpring({
+		...basicFadeAnimationObject,
 		reverse: isTextFadingOutState,
 	});
-	const clickHintFadeInAnimation = useSpring({
-		...basicFadeInAnimationObject,
+	const clickHintFadeAnimation = useSpring({
+		...basicFadeAnimationObject,
 		delay: clickHintAnimationDelay,
 	});
 
 	// texts
 	const introductionTexts = texts.chapter00.introduction;
-	const mountableTextsInstance = useMemo(() => {
-		const instanceTexts = Lodash.sample(introductionTexts.dialogsSelection);
-		return instanceTexts;
+	const selectedDialog = useMemo(() => {
+		return Lodash.sample(introductionTexts.dialogsSelection);
 	}, [introductionTexts]);
+	const isOnFirstDialogLine = dialogLineIndexState === 0;
+	const clickHint = isOnFirstDialogLine && (
+		<ClickHintContainer style={clickHintFadeAnimation}>
+			<Text>{introductionTexts.clickHint}</Text>
+		</ClickHintContainer>
+	);
 
 	// clickHandler
 	const clickHandler = () => {
 		setIsTextFadingOutState(true);
 		setTimeout(() => {
-			const hasDisplayedAllTexts = introductionStageState === mountableTextsInstance.length - 1;
-			if (hasDisplayedAllTexts) {
-				skipChapter();
+			const hasDialogEnded = dialogLineIndexState >= selectedDialog.length - 1;
+			if (hasDialogEnded) {
+				return skipChapter();
 			} else {
-				setIntroductionStageState(introductionStageState + 1);
+				setDialogLineIndexState(dialogLineIndexState + 1);
 			}
 			setIsTextFadingOutState(false);
 		}, textFadeDuration);
@@ -52,13 +57,9 @@ export const IntroductionScreen = () => {
 
 	return (
 		<IntroductionScreenContainer onClick={clickHandler}>
-			<animated.div style={mainTextFadeInAnimation}>
-				<Text>{mountableTextsInstance[introductionStageState]}</Text>
-				{introductionStageState === 0 && (
-					<ClickHintContainer style={clickHintFadeInAnimation}>
-						<Text>{introductionTexts.clickHint}</Text>
-					</ClickHintContainer>
-				)}
+			<animated.div style={mainTextFadeAnimation}>
+				<Text>{selectedDialog[dialogLineIndexState]}</Text>
+				{clickHint}
 			</animated.div>
 		</IntroductionScreenContainer>
 	);
