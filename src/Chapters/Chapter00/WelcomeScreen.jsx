@@ -1,4 +1,5 @@
-import { useTextsContext } from 'Context/TextsContext';
+import { texts } from 'Texts/texts';
+import { Text } from 'Texts/Text';
 import { useSpring } from 'react-spring';
 import { WelcomeScreenContainer, IntroductionScreenContainer } from './styles';
 
@@ -15,12 +16,14 @@ export const WelcomeScreen = () => {
 		delay: animationDelay,
 	});
 
-	const welcomeText = useTextsContext().chapter00.welcome;
+	const welcomeText = texts.chapter00.welcome;
 
 	return (
 		<>
 			<IntroductionScreenContainer />
-			<WelcomeScreenContainer style={fadingAnimation}>{welcomeText}</WelcomeScreenContainer>
+			<WelcomeScreenContainer style={fadingAnimation}>
+				<Text>{welcomeText}</Text>
+			</WelcomeScreenContainer>
 		</>
 	);
 };

@@ -1,5 +1,6 @@
 import { useChaptersContext } from 'Context/ChaptersContext';
-import { useTextsContext } from 'Context/TextsContext';
+import { Text } from 'Texts/Text';
+import { texts } from 'Texts/texts';
 import { useMemo, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { pickRandomObjectFromArray } from 'Utils/arraysUtils';
@@ -29,7 +30,7 @@ export const IntroductionScreen = () => {
 	});
 
 	// texts
-	const introductionTexts = useTextsContext().chapter00.introduction;
+	const introductionTexts = texts.chapter00.introduction;
 	const mountableTextsInstance = useMemo(() => {
 		const instanceTexts = pickRandomObjectFromArray(introductionTexts.dialogsSelection);
 		return instanceTexts;
@@ -52,10 +53,10 @@ export const IntroductionScreen = () => {
 	return (
 		<IntroductionScreenContainer onClick={clickHandler}>
 			<animated.div style={mainTextFadeInAnimation}>
-				{mountableTextsInstance[introductionStageState]}
+				<Text>{mountableTextsInstance[introductionStageState]}</Text>
 				{introductionStageState === 0 && (
 					<ClickHintContainer style={clickHintFadeInAnimation}>
-						{introductionTexts.clickHint}
+						<Text>{introductionTexts.clickHint}</Text>
 					</ClickHintContainer>
 				)}
 			</animated.div>

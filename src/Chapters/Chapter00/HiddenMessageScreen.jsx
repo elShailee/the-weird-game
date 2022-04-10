@@ -1,7 +1,12 @@
-import { useTextsContext } from 'Context/TextsContext';
+import { texts } from 'Texts/texts';
+import { Text } from 'Texts/Text';
 import { HiddenMessageTextContainer } from './styles';
 
 export const HiddenMessageScreen = () => {
-	const hiddenMessageText = useTextsContext().chapter00.hiddenMessage;
-	return <HiddenMessageTextContainer>{hiddenMessageText}</HiddenMessageTextContainer>;
+	const hiddenMessageText = texts.chapter00.hiddenMessage;
+	return (
+		<HiddenMessageTextContainer>
+			<Text>{hiddenMessageText}</Text>
+		</HiddenMessageTextContainer>
+	);
 };
