@@ -1,7 +1,7 @@
-import lodash from 'lodash';
+import Lodash from 'lodash';
 
 export const Text = ({ children }) => {
-	const createRandomKey = () => lodash.uniqueId('text-element-');
+	const createRandomKey = () => Lodash.uniqueId('text-element-');
 
 	const iterateOnCells = arr => {
 		return arr.map(cell => {

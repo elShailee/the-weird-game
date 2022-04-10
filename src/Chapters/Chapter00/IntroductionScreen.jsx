@@ -3,7 +3,7 @@ import { Text } from 'Texts/Text';
 import { texts } from 'Texts/texts';
 import { useMemo, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
-import { pickRandomObjectFromArray } from 'Utils/arraysUtils';
+import Lodash from 'lodash';
 import { IntroductionScreenContainer, ClickHintContainer } from './styles';
 
 export const IntroductionScreen = () => {
@@ -32,7 +32,7 @@ export const IntroductionScreen = () => {
 	// texts
 	const introductionTexts = texts.chapter00.introduction;
 	const mountableTextsInstance = useMemo(() => {
-		const instanceTexts = pickRandomObjectFromArray(introductionTexts.dialogsSelection);
+		const instanceTexts = Lodash.sample(introductionTexts.dialogsSelection);
 		return instanceTexts;
 	}, [introductionTexts]);
 
