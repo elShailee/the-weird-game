@@ -5,7 +5,7 @@ import { useMemo, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
 import Lodash from 'lodash';
 import { IntroductionScreenContainer, ClickHintContainer } from './styles';
-import { keyboardHandler } from 'Utils/keyboardUtils';
+import { KeyDownHandler, SwipeHandler } from 'Utils/inputUtils';
 
 export const IntroductionScreen = () => {
 	const [dialogLineIndexState, setDialogLineIndexState] = useState(0);
@@ -64,23 +64,39 @@ export const IntroductionScreen = () => {
 		}, textFadeDuration);
 	};
 
-	// keypress callback
-	const keypressCallback = e => {
-		const isASkippingKeys = ['Enter', 'Escape', 'ArrowRight', 'Space'].includes(e.code);
-		const isARewindingKeys = ['ArrowLeft'].includes(e.code);
-		if (isASkippingKeys) {
+	// keypress action
+	const keypressAction = e => {
+		const skippingKeys = ['Enter', 'Escape', 'ArrowRight', 'Space'];
+		const rewindingKeys = ['ArrowLeft'];
+
+		const isASkippingKey = skippingKeys.includes(e.code);
+		const isARewindingKey = rewindingKeys.includes(e.code);
+
+		if (isASkippingKey) {
 			dialogLineSkip();
-		} else if (isARewindingKeys) {
+		} else if (isARewindingKey) {
 			dialogLineRewind();
 		}
 	};
 
+	//swipe actions
+	const swipeActions = {
+		left: dialogLineSkip,
+		right: dialogLineRewind,
+		up: dialogLineSkip,
+		down: dialogLineRewind,
+	};
+
 	return (
-		<IntroductionScreenContainer onClick={dialogLineSkip} {...keyboardHandler(keypressCallback)}>
-			<animated.div style={mainTextFadeAnimation}>
-				<Text>{selectedDialog[dialogLineIndexState]}</Text>
-				{clickHint}
-			</animated.div>
-		</IntroductionScreenContainer>
+		<SwipeHandler actions={swipeActions}>
+			<KeyDownHandler action={keypressAction}>
+				<IntroductionScreenContainer onClick={dialogLineSkip}>
+					<animated.div style={mainTextFadeAnimation}>
+						<Text>{selectedDialog[dialogLineIndexState]}</Text>
+						{clickHint}
+					</animated.div>
+				</IntroductionScreenContainer>
+			</KeyDownHandler>
+		</SwipeHandler>
 	);
 };
