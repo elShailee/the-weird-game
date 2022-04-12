@@ -5,6 +5,7 @@ import { useMemo, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
 import Lodash from 'lodash';
 import { IntroductionScreenContainer, ClickHintContainer } from './styles';
+import { keyboardHandler } from 'Utils/keyboardUtils';
 
 export const IntroductionScreen = () => {
 	const [dialogLineIndexState, setDialogLineIndexState] = useState(0);
@@ -41,22 +42,41 @@ export const IntroductionScreen = () => {
 		</ClickHintContainer>
 	);
 
-	// clickHandler
-	const clickHandler = () => {
+	// dialog line funcs
+	const dialogLineSkip = () => {
+		dialogLineChange(dialogLineIndexState + 1);
+	};
+	const dialogLineRewind = () => {
+		if (dialogLineIndexState > 0) {
+			dialogLineChange(dialogLineIndexState - 1);
+		}
+	};
+	const dialogLineChange = num => {
 		setIsTextFadingOutState(true);
 		setTimeout(() => {
-			const hasDialogEnded = dialogLineIndexState >= selectedDialog.length - 1;
+			const hasDialogEnded = num >= selectedDialog.length;
 			if (hasDialogEnded) {
 				return skipChapter();
 			} else {
-				setDialogLineIndexState(dialogLineIndexState + 1);
+				setDialogLineIndexState(num);
 			}
 			setIsTextFadingOutState(false);
 		}, textFadeDuration);
 	};
 
+	// keypress callback
+	const keypressCallback = e => {
+		const isASkippingKeys = ['Enter', 'Escape', 'ArrowRight', 'Space'].includes(e.code);
+		const isARewindingKeys = ['ArrowLeft'].includes(e.code);
+		if (isASkippingKeys) {
+			dialogLineSkip();
+		} else if (isARewindingKeys) {
+			dialogLineRewind();
+		}
+	};
+
 	return (
-		<IntroductionScreenContainer onClick={clickHandler}>
+		<IntroductionScreenContainer onClick={dialogLineSkip} {...keyboardHandler(keypressCallback)}>
 			<animated.div style={mainTextFadeAnimation}>
 				<Text>{selectedDialog[dialogLineIndexState]}</Text>
 				{clickHint}
