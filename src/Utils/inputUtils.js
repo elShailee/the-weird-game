@@ -1,19 +1,19 @@
 import { useMemo, useState } from 'react';
 
 // works by trying to force focus on target component when mounted,
-// couldn't be 100% guaranteed, as of user's interaction with window.
-export const KeyDownHandler = ({ action, children }) => {
+// couldn't be 100% guaranteed, as of user's freedom.
+export const KeyDownHandler = ({ handleKeyDown, children }) => {
 	return (
-		<div tabIndex='0' ref={ref => ref && ref.focus()} onKeyDown={action}>
+		<div tabIndex='0' ref={ref => ref && ref.focus()} onKeyDown={handleKeyDown}>
 			{children}
 		</div>
 	);
 };
 
-export const SwipeHandler = ({ actions, children }) => {
+export const SwipeHandler = ({ handleSwipes, children }) => {
 	const [touchStart, setTouchStart] = useState(null);
 	const [touchEnd, setTouchEnd] = useState(null);
-	const minSwipeDistance = 50;
+	const minSwipePxDistance = 70;
 
 	const touchPositionFromEvent = e => {
 		return { x: e.targetTouches[0].clientX, y: e.targetTouches[0].clientY };
@@ -28,24 +28,24 @@ export const SwipeHandler = ({ actions, children }) => {
 
 	const onTouchEnd = () => {
 		if (!touchStart || !touchEnd) return;
-		const distance = {
+		const distanceSwiped = {
 			x: touchStart.x - touchEnd.x,
 			y: touchStart.y - touchEnd.y,
 		};
-		const isLeftSwipe = distance.x > minSwipeDistance;
-		const isRightSwipe = distance.x < -minSwipeDistance;
-		const isUpSwipe = distance.y > minSwipeDistance;
-		const isDownSwipe = distance.y < -minSwipeDistance;
+		const isLeftSwipe = distanceSwiped.x > minSwipePxDistance;
+		const isRightSwipe = distanceSwiped.x < -minSwipePxDistance;
+		const isUpSwipe = distanceSwiped.y > minSwipePxDistance;
+		const isDownSwipe = distanceSwiped.y < -minSwipePxDistance;
 
 		// if-else avoids matching both horizontal and vertical swipes at the same time.
 		if (isLeftSwipe) {
-			actions.left && actions.left();
+			handleSwipes.left && handleSwipes.left();
 		} else if (isRightSwipe) {
-			actions.right && actions.right();
+			handleSwipes.right && handleSwipes.right();
 		} else if (isUpSwipe) {
-			actions.up && actions.up();
+			handleSwipes.up && handleSwipes.up();
 		} else if (isDownSwipe) {
-			actions.down && actions.down();
+			handleSwipes.down && handleSwipes.down();
 		}
 	};
 

@@ -51,21 +51,21 @@ export const IntroductionScreen = () => {
 			dialogLineChange(dialogLineIndexState - 1);
 		}
 	};
-	const dialogLineChange = num => {
+	const dialogLineChange = newLineIndex => {
 		setIsTextFadingOutState(true);
 		setTimeout(() => {
-			const hasDialogEnded = num >= selectedDialog.length;
+			const hasDialogEnded = newLineIndex >= selectedDialog.length;
 			if (hasDialogEnded) {
 				return skipChapter();
 			} else {
-				setDialogLineIndexState(num);
+				setDialogLineIndexState(newLineIndex);
 			}
 			setIsTextFadingOutState(false);
 		}, textFadeDuration);
 	};
 
-	// keypress action
-	const keypressAction = e => {
+	// keypress handle func
+	const handleKeyDown = e => {
 		const skippingKeys = ['Enter', 'Escape', 'ArrowRight', 'Space'];
 		const rewindingKeys = ['ArrowLeft'];
 
@@ -79,8 +79,8 @@ export const IntroductionScreen = () => {
 		}
 	};
 
-	//swipe actions
-	const swipeActions = {
+	//swipe handle funcs
+	const handleSwipes = {
 		left: dialogLineSkip,
 		right: dialogLineRewind,
 		up: dialogLineSkip,
@@ -88,8 +88,8 @@ export const IntroductionScreen = () => {
 	};
 
 	return (
-		<SwipeHandler actions={swipeActions}>
-			<KeyDownHandler action={keypressAction}>
+		<SwipeHandler handleSwipes={handleSwipes}>
+			<KeyDownHandler handleKeyDown={handleKeyDown}>
 				<IntroductionScreenContainer onClick={dialogLineSkip}>
 					<animated.div style={mainTextFadeAnimation}>
 						<Text>{selectedDialog[dialogLineIndexState]}</Text>
