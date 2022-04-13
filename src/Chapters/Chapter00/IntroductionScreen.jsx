@@ -5,6 +5,7 @@ import { useMemo, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
 import Lodash from 'lodash';
 import { IntroductionScreenContainer, ClickHintContainer } from './styles';
+import { KeyDownHandler, SwipeHandler } from 'Utils/inputUtils';
 
 export const IntroductionScreen = () => {
 	const [dialogLineIndexState, setDialogLineIndexState] = useState(0);
@@ -41,26 +42,61 @@ export const IntroductionScreen = () => {
 		</ClickHintContainer>
 	);
 
-	// clickHandler
-	const clickHandler = () => {
+	// dialog line funcs
+	const dialogLineSkip = () => {
+		dialogLineChange(dialogLineIndexState + 1);
+	};
+	const dialogLineRewind = () => {
+		if (dialogLineIndexState > 0) {
+			dialogLineChange(dialogLineIndexState - 1);
+		}
+	};
+	const dialogLineChange = newLineIndex => {
 		setIsTextFadingOutState(true);
 		setTimeout(() => {
-			const hasDialogEnded = dialogLineIndexState >= selectedDialog.length - 1;
+			const hasDialogEnded = newLineIndex >= selectedDialog.length;
 			if (hasDialogEnded) {
 				return skipChapter();
 			} else {
-				setDialogLineIndexState(dialogLineIndexState + 1);
+				setDialogLineIndexState(newLineIndex);
 			}
 			setIsTextFadingOutState(false);
 		}, textFadeDuration);
 	};
 
+	// keypress handle func
+	const handleKeyDown = e => {
+		const skippingKeys = ['Enter', 'Escape', 'ArrowRight', 'Space'];
+		const rewindingKeys = ['ArrowLeft'];
+
+		const isASkippingKey = skippingKeys.includes(e.code);
+		const isARewindingKey = rewindingKeys.includes(e.code);
+
+		if (isASkippingKey) {
+			dialogLineSkip();
+		} else if (isARewindingKey) {
+			dialogLineRewind();
+		}
+	};
+
+	//swipe handle funcs
+	const handleSwipes = {
+		left: dialogLineSkip,
+		right: dialogLineRewind,
+		up: dialogLineSkip,
+		down: dialogLineRewind,
+	};
+
 	return (
-		<IntroductionScreenContainer onClick={clickHandler}>
-			<animated.div style={mainTextFadeAnimation}>
-				<Text>{selectedDialog[dialogLineIndexState]}</Text>
-				{clickHint}
-			</animated.div>
-		</IntroductionScreenContainer>
+		<SwipeHandler handleSwipes={handleSwipes}>
+			<KeyDownHandler handleKeyDown={handleKeyDown}>
+				<IntroductionScreenContainer onClick={dialogLineSkip}>
+					<animated.div style={mainTextFadeAnimation}>
+						<Text>{selectedDialog[dialogLineIndexState]}</Text>
+						{clickHint}
+					</animated.div>
+				</IntroductionScreenContainer>
+			</KeyDownHandler>
+		</SwipeHandler>
 	);
 };
