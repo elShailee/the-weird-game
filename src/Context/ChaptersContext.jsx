@@ -3,7 +3,7 @@ import { useState, createContext, useContext } from 'react';
 export const ChaptersContext = createContext();
 
 export function ChaptersProvider(props) {
-	const [currentChapterIndex, setCurrentChapterByIndex] = useState(0);
+	const [currentChapterIndex, setCurrentChapterByIndex] = useState(1);
 	const skipChapter = () => setCurrentChapterByIndex(currentChapterIndex + 1);
 
 	return (

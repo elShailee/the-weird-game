@@ -15,6 +15,7 @@ export const WelcomeScreenContainer = styled(animated.div)`
 	${({ theme }) => theme.customStyles.nonSelectable}
 	padding: ${({ theme }) => theme.sizes.padding.L};
 	background-color: ${({ theme }) => theme.colors.chapter00.welcomeScreenBG};
+	color: ${({ theme }) => theme.colors.chapter00.welcomeScreenText};
 	font-family: ${({ theme }) => theme.fonts.primary};
 	font-size: ${({ theme }) => theme.sizes.text.XL};
 `;

@@ -13,6 +13,7 @@ export const theme = {
 		text: {
 			XL: '3rem',
 			L: '2rem',
+			M: '1.5rem',
 			S: '1rem',
 		},
 		letterSpacing: {
@@ -34,6 +35,7 @@ export const theme = {
 		nonSelectable: `
 			user-select: none;
 			-webkit-user-drag: none;
+			-webkit-tap-highlight-color: transparent;
 		`,
 		clickable: `
 			cursor: pointer;
@@ -49,9 +51,21 @@ export const theme = {
 	},
 	colors: {
 		chapter00: {
-			welcomeScreenBG: palette.red[950],
+			welcomeScreenBG: palette.orange[900],
+			welcomeScreenText: palette.gray[200],
 			introScreenBG: palette.gray[200],
 			introScreenText: palette.gray[700],
+		},
+		chapter01: {
+			BG: palette.blue[350],
+			text: {
+				light: palette.white[900],
+				dark: palette.orange[950],
+			},
+			addButton: {
+				BG: palette.orange[900],
+				text: palette.white[900],
+			},
 		},
 	},
 };
