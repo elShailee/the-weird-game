@@ -40,3 +40,33 @@ export const AddButton = styled(animated.div)`
 		filter: brightness(185%) saturate(65%);
 	}
 `;
+
+export const SumContainer = styled.div`
+	font-size: ${({ shouldShow }) => (shouldShow ? '2rem' : '0')};
+	overflow: hidden;
+	transition: font-size 1s ease-in-out;
+`;
+
+export const Btn = styled.button`
+	width: 5rem;
+	height: 5rem;
+	font-size: 2rem;
+	border-radius: 50%;
+	margin: 1rem;
+`;
+
+export const TrashButton = styled.button`
+	border-radius: 5px;
+	height: 2rem;
+	position: absolute;
+	bottom: 5rem;
+	right: 3rem;
+	opacity: ${({ shouldShow }) => (shouldShow ? '1' : '0')};
+	transition: opacity 1s;
+`;
+
+export const TipContainer = styled.div`
+	position: absolute;
+	top: 2rem;
+	font-size: ${({ theme }) => theme.sizes.text.S};
+`;
