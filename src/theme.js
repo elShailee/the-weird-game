@@ -53,6 +53,7 @@ export const theme = {
 		},
 	},
 	shadows: {
+		Min: 'box-shodow: 0;',
 		S: 'box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.25), 0px 6px 10px 0px rgba(0, 0, 0, 0.2), 0px 1px 18px 0px rgba(0, 0, 0, 0.16);',
 		L: 'box-shadow: 0px 7px 8px -4px rgb(0, 0, 0, 0.25), 0px 12px 17px 2px rgb(0, 0, 0, 0.2),	0px 5px 22px 4px rgb(0, 0, 0, 0.16);',
 	},
