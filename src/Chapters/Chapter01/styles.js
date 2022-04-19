@@ -1,4 +1,3 @@
-import { animated } from 'react-spring';
 import styled from 'styled-components';
 
 export const ChapterContainer = styled.div`
@@ -30,10 +29,10 @@ export const TrashButton = styled.button`
 	transition: opacity 1s;
 `;
 
-export const TipContainer = styled(animated.div)`
+export const TipContainer = styled.div`
 	position: absolute;
-	padding: ${({ theme }) => theme.sizes.padding.M} ${({ theme }) => theme.sizes.padding.L};
+	padding: ${({ theme }) => theme.sizes.padding.M} ${({ theme }) => theme.sizes.padding.XL};
 	border-radius: ${({ theme }) => theme.sizes.borderRadius.M};
 	top: 2rem;
-	font-size: ${({ theme }) => theme.sizes.text.S};
+	font-size: ${({ theme }) => theme.sizes.text.M};
 `;
