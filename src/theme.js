@@ -1,9 +1,15 @@
 import palette from 'palette';
 
+export const enlarge = (inputSize, incrementBy) => {
+	const sizesArray = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'MAX'];
+	return sizesArray[sizesArray.indexOf(inputSize) + incrementBy];
+};
+
 export const theme = {
 	sizes: {
 		border: {},
 		borderRadius: {
+			M: '0.5rem',
 			Max: '50%',
 		},
 		padding: {
@@ -18,6 +24,23 @@ export const theme = {
 		},
 		letterSpacing: {
 			L: '0.07rem',
+		},
+		components: {
+			FAB: {
+				S: '2.5rem',
+				M: '3.5rem',
+				L: '4.5rem',
+			},
+		},
+	},
+	filters: {
+		darken: {
+			S: 'brightness(85%) saturate(85%)',
+			L: 'brightness(65%) saturate(65%)',
+		},
+		lighten: {
+			S: 'brightness(123%) saturate(85%)',
+			L: 'brightness(185%) saturate(65%)',
 		},
 	},
 	fonts: {
@@ -65,6 +88,18 @@ export const theme = {
 			addButton: {
 				BG: palette.orange[900],
 				text: palette.white[900],
+			},
+		},
+		inputs: {
+			disabled: {
+				text: palette.gray[900],
+				BG: palette.blue[720],
+			},
+			dark: {
+				text: 'black',
+			},
+			light: {
+				text: 'white',
 			},
 		},
 	},
