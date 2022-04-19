@@ -1,4 +1,3 @@
-import { useChaptersContext } from 'Context/ChaptersContext';
 import { Text } from 'Texts/Text';
 import { texts } from 'Texts/texts';
 import { useMemo, useState } from 'react';
@@ -6,11 +5,12 @@ import { useSpring, animated } from 'react-spring';
 import Lodash from 'lodash';
 import { IntroductionScreenContainer, ClickHintContainer } from './styles';
 import { KeyDownHandler, SwipeHandler } from 'Utils/inputUtils';
+import { useScreensContext } from 'Context/ScreensContext';
 
-export const IntroductionScreen = () => {
+export const DialogScreen = () => {
 	const [dialogLineIndexState, setDialogLineIndexState] = useState(0);
 	const [isTextFadingOutState, setIsTextFadingOutState] = useState(false);
-	const { skipChapter } = useChaptersContext();
+	const { setCurrentScreenByTitle } = useScreensContext();
 
 	// animations
 	const textFadeDuration = 500;
@@ -56,7 +56,7 @@ export const IntroductionScreen = () => {
 		setTimeout(() => {
 			const hasDialogEnded = newLineIndex >= selectedDialog.length;
 			if (hasDialogEnded) {
-				return skipChapter();
+				return setCurrentScreenByTitle('money');
 			} else {
 				setDialogLineIndexState(newLineIndex);
 			}

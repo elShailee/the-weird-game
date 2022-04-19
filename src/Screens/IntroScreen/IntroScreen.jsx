@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useTimeouts } from 'Utils/useTimeoutAndTimeouts';
-import { IntroductionScreen } from './IntroductionScreen';
+import { DialogScreen } from './DialogScreen';
 import { HiddenMessageScreen } from './HiddenMessageScreen';
 import { WelcomeScreen } from './WelcomeScreen';
 
-export const Chapter00 = () => {
+export const IntroScreen = () => {
 	const [screenState, setScreenState] = useState(<HiddenMessageScreen />);
 
 	const welcomeAnimationTimings = {
@@ -20,7 +20,7 @@ export const Chapter00 = () => {
 				setScreenState(<WelcomeScreen animationTimings={welcomeAnimationTimings} />);
 			},
 			() => {
-				setScreenState(<IntroductionScreen />);
+				setScreenState(<DialogScreen />);
 			},
 		],
 		[100, totalWelcomeAnimationDuration],

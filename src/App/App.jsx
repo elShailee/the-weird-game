@@ -1,4 +1,5 @@
-import { ChaptersProvider } from 'Context/ChaptersContext';
+import { PlayerDataProvider } from 'Context/PlayerDataContext';
+import { ScreensProvider } from 'Context/ScreensContext';
 import { Game } from 'Game/Game';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'theme';
@@ -6,9 +7,11 @@ import { theme } from 'theme';
 function App() {
 	return (
 		<ThemeProvider theme={theme}>
-			<ChaptersProvider>
-				<Game />
-			</ChaptersProvider>
+			<ScreensProvider>
+				<PlayerDataProvider>
+					<Game />
+				</PlayerDataProvider>
+			</ScreensProvider>
 		</ThemeProvider>
 	);
 }

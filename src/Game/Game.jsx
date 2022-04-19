@@ -1,7 +1,7 @@
-import { useCurrentChapter } from 'Utils/chaptersUtils';
+import { useCurrentScreen } from 'Utils/screensUtils';
 
 export const Game = () => {
-	const ChapterComponent = useCurrentChapter();
+	const ScreenComponent = useCurrentScreen();
 
-	return ChapterComponent ? <ChapterComponent /> : <div>Game Fallback</div>;
+	return ScreenComponent ? <ScreenComponent /> : <div>Game Fallback</div>;
 };
