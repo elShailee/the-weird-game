@@ -106,6 +106,11 @@ export const theme = {
 				text: palette.white[900],
 			},
 		},
+		navbar: {
+			BG: palette.gray[502],
+			buttonsBG: palette.gray[503],
+			openButtonBG: palette.gray[503],
+		},
 		inputs: {
 			disabled: {
 				text: palette.gray[900],

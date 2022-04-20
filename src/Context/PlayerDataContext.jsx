@@ -7,6 +7,7 @@ export function PlayerDataProvider(props) {
 		money: 0,
 		spentMoney: 0,
 		navbarButtons: {
+			closeNavbar: { icon: '<', isActive: true },
 			money: { icon: '$', isActive: false },
 			shop: { icon: '%', isActive: false },
 		},
