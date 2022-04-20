@@ -45,6 +45,11 @@ export const GeneralButton = styled.div`
 	}
 `;
 
+export const SquareButton = styled(GeneralButton)`
+	width: ${({ theme }) => theme.sizes.components.Button.L};
+	height: ${({ theme }) => theme.sizes.components.Button.L};
+`;
+
 export const FloatingActionButton = styled(GeneralButton)`
 	width: ${({ theme, size }) => theme.sizes.components.FAB[size]};
 	height: ${({ theme, size }) => theme.sizes.components.FAB[size]};

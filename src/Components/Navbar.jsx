@@ -2,13 +2,13 @@ import { usePlayerDataContext } from 'Context/PlayerDataContext';
 import { useScreensContext } from 'Context/ScreensContext';
 import styled from 'styled-components';
 import { useTheme } from 'styled-components';
-import { GeneralButton } from './buttons';
+import { SquareButton } from './buttons';
 
 export const Navbar = ({ isOpen, closeNavbar }) => {
 	const { setCurrentScreenByTitle } = useScreensContext();
-	const { playerDataState } = usePlayerDataContext();
-	const { navbarButtons } = playerDataState;
+	const navbarButtons = usePlayerDataContext().playerDataState.navbarButtons;
 	const theme = useTheme();
+
 	const getNavButtons = () => {
 		return Object.keys(navbarButtons).map((buttonTitle, index) => {
 			const buttonProps = navbarButtons[buttonTitle];
@@ -37,17 +37,13 @@ export const Navbar = ({ isOpen, closeNavbar }) => {
 const NavBarContainer = styled.div`
 	position: absolute;
 	height: 100vh;
-	width: fit-content;
-	left: ${({ isOpen }) => (isOpen ? '0' : '-6rem')};
-	top: 0;
 	background-color: ${({ theme }) => theme.colors.navbar.BG};
 	${({ theme }) => theme.shadows.L}
+	left: ${({ isOpen }) => (isOpen ? '0' : '-6rem')};
 	transition: left 1s;
 `;
 
-const NavButton = styled(GeneralButton)`
+const NavButton = styled(SquareButton)`
 	margin: ${({ theme }) => theme.sizes.padding.M};
-	width: ${({ theme }) => theme.sizes.components.Button.L};
-	height: ${({ theme }) => theme.sizes.components.Button.L};
 	${({ theme }) => theme.shadows.Min}
 `;
