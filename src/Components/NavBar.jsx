@@ -3,20 +3,22 @@ import { useScreensContext } from 'Context/ScreensContext';
 import styled from 'styled-components';
 import { GeneralButton } from './buttons';
 
-export const NavBar = () => {
+export const NavBar = props => {
 	const { setCurrentScreenByTitle } = useScreensContext();
 	const { playerDataState } = usePlayerDataContext();
 	const { navbarButtons } = playerDataState;
 	const getNavButtons = () => {
-		return navbarButtons.map((buttonObj, index) => {
-			const { title, icon } = buttonObj;
-			const clickHandler = () => setCurrentScreenByTitle(title);
+		return Object.keys(navbarButtons).map((buttonTitle, index) => {
+			const buttonProps = navbarButtons[buttonTitle];
+			if (!buttonProps.isActive) return null;
+			const { icon } = buttonProps;
+			const clickHandler = () => setCurrentScreenByTitle(buttonTitle);
 			return (
 				<NavButton
 					onClick={clickHandler}
-					key={`${title} NavButton`}
+					key={`${buttonTitle} NavButton:${index}`}
 					size='L'
-					color='rgba(200, 200, 200, 0.3)'
+					color='rgba(128, 128, 128, 0.3)'
 				>
 					{icon}
 				</NavButton>
@@ -24,17 +26,18 @@ export const NavBar = () => {
 		});
 	};
 
-	return <NavBarContainer>{getNavButtons()}</NavBarContainer>;
+	return <NavBarContainer {...props}>{getNavButtons()}</NavBarContainer>;
 };
 
 const NavBarContainer = styled.div`
 	position: absolute;
 	height: 100vh;
 	width: fit-content;
-	left: 0;
+	left: ${({ isOpen }) => (isOpen ? '0' : '-6rem')};
 	top: 0;
-	background-color: rgba(200, 200, 200, 0.2);
+	background-color: rgba(128, 128, 128, 0.2);
 	${({ theme }) => theme.shadows.L}
+	transition: left 1s;
 `;
 
 const NavButton = styled(GeneralButton)`

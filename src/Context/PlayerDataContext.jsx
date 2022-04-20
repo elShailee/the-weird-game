@@ -4,10 +4,12 @@ export const PlayerDataContext = createContext();
 
 export function PlayerDataProvider(props) {
 	const initialState = {
-		navbarButtons: [
-			{ title: 'intro', icon: '^' },
-			{ title: 'money', icon: '$' },
-		],
+		money: 0,
+		spentMoney: 0,
+		navbarButtons: {
+			money: { icon: '$', isActive: false },
+			shop: { icon: '%', isActive: false },
+		},
 	};
 	const [playerDataState, setPlayerDataState] = useState(initialState);
 
