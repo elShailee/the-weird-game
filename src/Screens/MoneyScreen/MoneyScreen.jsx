@@ -34,7 +34,6 @@ export const MoneyScreen = () => {
 	// };
 
 	const addHandler = () => {
-		console.log(playerDataState.money);
 		const newPlayerDataState = cloneDeep(playerDataState);
 		newPlayerDataState.money = newPlayerDataState.money + 1;
 		const buttonObj = newPlayerDataState.navbarButtons['money'];

@@ -19,6 +19,7 @@ export const theme = {
 			M: '0.5rem',
 			L: '0.75rem',
 			XL: '1rem',
+			XXL: '1.5rem',
 		},
 		text: {
 			S: '0.75rem',
