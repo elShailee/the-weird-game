@@ -7,17 +7,15 @@ import { IntroductionScreenContainer, ClickHintContainer } from './styles';
 import { KeyDownHandler, SwipeHandler } from 'Utils/inputUtils';
 import { useScreensContext } from 'Context/ScreensContext';
 
-export const IntroScreen = () => {
+export const IntroScreen = ({ screenFadeAnimation, fadeToScreen }) => {
 	const animationsTimings = {
 		textFadeDuration: 500,
 		clickHintAnimationDelay: 4000,
-		screenFadeDuration: 1000,
 	};
 
 	const [introLineIndexState, setIntroLineIndexState] = useState(0);
 	const [isTextFadingOutState, setIsTextFadingOutState] = useState(false);
-	const [isUnmountingState, setIsUnmountingState] = useState(false);
-	const { setCurrentScreenByTitle } = useScreensContext();
+	const { currentScreenTitle } = useScreensContext();
 
 	// animations
 	const basicFadeAnimationObject = {
@@ -57,13 +55,12 @@ export const IntroScreen = () => {
 	};
 	const dialogLineChange = newLineIndex => {
 		const hasDialogEnded = newLineIndex >= selectedDialog.length;
-		!hasDialogEnded && setIsTextFadingOutState(true);
+		setIsTextFadingOutState(true);
 		setTimeout(() => {
 			if (hasDialogEnded) {
-				setIsUnmountingState(true);
 				setTimeout(() => {
-					return setCurrentScreenByTitle('money');
-				}, animationsTimings.screenFadeDuration);
+					fadeToScreen('money');
+				}, animationsTimings.textFadeDuration);
 			} else {
 				setIntroLineIndexState(newLineIndex);
 				setIsTextFadingOutState(false);
@@ -94,21 +91,16 @@ export const IntroScreen = () => {
 		down: dialogLineRewind,
 	};
 
-	const fadingAnimation = useSpring({
-		to: { opacity: 0 },
-		from: { opacity: 1 },
-		config: { duration: animationsTimings.screenFadeDuration },
-		pause: !isUnmountingState,
-	});
-
 	return (
 		<SwipeHandler handleSwipes={handleSwipes}>
 			<KeyDownHandler handleKeyDown={handleKeyDown}>
-				<IntroductionScreenContainer onClick={dialogLineSkip} style={fadingAnimation}>
-					<animated.div style={mainTextFadeAnimation}>
-						<Text>{selectedDialog[introLineIndexState]}</Text>
-						{clickHint}
-					</animated.div>
+				<IntroductionScreenContainer onClick={dialogLineSkip} style={screenFadeAnimation}>
+					{currentScreenTitle === 'intro' && (
+						<animated.div style={mainTextFadeAnimation}>
+							<Text>{selectedDialog[introLineIndexState]}</Text>
+							{clickHint}
+						</animated.div>
+					)}
 				</IntroductionScreenContainer>
 			</KeyDownHandler>
 		</SwipeHandler>

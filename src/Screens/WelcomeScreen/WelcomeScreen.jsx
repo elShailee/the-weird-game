@@ -20,7 +20,7 @@ export const WelcomeScreen = ({ fadeToScreen, screenFadeAnimation }) => {
 						<Text>{welcomeText}</Text>
 					</ScreenContainer>,
 				),
-			() => fadeToScreen('money'),
+			() => fadeToScreen('intro'),
 		],
 		[100, screenDuration],
 	);
