@@ -88,18 +88,18 @@ export const theme = {
 		`,
 	},
 	colors: {
-		chapter00: {
+		introScreen: {
 			welcomeScreenBG: palette.orange[600],
 			welcomeScreenText: palette.gray[200],
-			introScreenBG: palette.gray[200],
-			introScreenText: palette.gray[700],
+			dialogScreenBG: palette.gray[200],
+			dialogScreenText: palette.gray[700],
 		},
-		chapter01: {
+		moneyScreen: {
 			BG: palette.blue[350],
 			focusBG: palette.blue[620],
 			text: {
 				light: palette.white[900],
-				dark: palette.orange[950],
+				faded: palette.blue[620],
 			},
 			addButton: {
 				BG: palette.orange[900],
@@ -120,8 +120,11 @@ export const theme = {
 				text: 'black',
 			},
 			light: {
-				text: 'white',
+				text: palette.white[900],
 			},
+		},
+		defaults: {
+			text: palette.white[900],
 		},
 	},
 };

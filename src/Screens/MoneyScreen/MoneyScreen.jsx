@@ -1,10 +1,16 @@
 import { FloatingActionButton } from 'Components/buttons';
+import { Link } from 'Components/texts';
 import { usePlayerDataContext } from 'Context/PlayerDataContext';
 import { cloneDeep } from 'lodash';
 import { useContext, useRef, useState } from 'react';
 import { ThemeContext } from 'styled-components';
 // import { useTurnNavButtonOn } from 'Utils/navbarUtils';
-import { ChapterContainer, SumContainer /*, TrashButton*/, DialogContainer } from './styles';
+import {
+	ScreenContainer,
+	SumContainer /*, TrashButton*/,
+	DialogContainer,
+	Credits,
+} from './styles';
 
 export const MoneyScreen = () => {
 	const theme = useContext(ThemeContext);
@@ -26,7 +32,7 @@ export const MoneyScreen = () => {
 	// const highlightDialog = () => {
 	// 	const { style } = dialogRef.current;
 	// 	style.transition = 'background-color 0s';
-	// 	style.backgroundColor = theme.colors.chapter01.focusBG;
+	// 	style.backgroundColor = theme.colors.moneyScreen.focusBG;
 	// 	setTimeout(() => {
 	// 		style.transition = 'background-color 1.5s ';
 	// 		style.backgroundColor = 'rgba(0,0,0,0)';
@@ -51,13 +57,13 @@ export const MoneyScreen = () => {
 	// };
 
 	return (
-		<ChapterContainer>
+		<ScreenContainer>
 			<SumContainer shouldShow={sumPoints() > 0}>{playerDataState.money}</SumContainer>
 			<FloatingActionButton
 				onClick={addHandler}
 				style={{ margin: '1rem' }}
 				tabIndex='-1'
-				color={theme.colors.chapter01.addButton.BG}
+				color={theme.colors.moneyScreen.addButton.BG}
 				size='L'
 			>
 				+
@@ -66,6 +72,9 @@ export const MoneyScreen = () => {
 			{/* <TrashButton shouldShow={sumPoints() >= stepSize} onClick={trashHandler}>
 				Do not press
 			</TrashButton> */}
-		</ChapterContainer>
+			<Credits>
+				inspired by <Link href='https://candybox2.github.io/candybox/'>Candy Box</Link>
+			</Credits>
+		</ScreenContainer>
 	);
 };

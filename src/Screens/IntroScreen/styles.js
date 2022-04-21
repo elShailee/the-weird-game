@@ -14,8 +14,8 @@ export const WelcomeScreenContainer = styled(animated.div)`
 	${({ theme }) => theme.customStyles.centerItems}
 	${({ theme }) => theme.customStyles.nonSelectable}
 	padding: ${({ theme }) => theme.sizes.padding.XL};
-	background-color: ${({ theme }) => theme.colors.chapter00.welcomeScreenBG};
-	color: ${({ theme }) => theme.colors.chapter00.welcomeScreenText};
+	background-color: ${({ theme }) => theme.colors.introScreen.welcomeScreenBG};
+	color: ${({ theme }) => theme.colors.introScreen.welcomeScreenText};
 	font-family: ${({ theme }) => theme.fonts.primary};
 	font-size: ${({ theme }) => theme.sizes.text.XL};
 `;
@@ -25,8 +25,8 @@ export const IntroductionScreenContainer = styled(animated.div)`
 	${({ theme }) => theme.customStyles.centerItems}
 	${({ theme }) => theme.customStyles.nonSelectable}
 	padding: ${({ theme }) => theme.sizes.padding.XL};
-	background-color: ${({ theme }) => theme.colors.chapter00.introScreenBG};
-	color: ${({ theme }) => theme.colors.chapter00.introScreenText};
+	background-color: ${({ theme }) => theme.colors.introScreen.dialogBG};
+	color: ${({ theme }) => theme.colors.introScreen.dialogText};
 	font-size: ${({ theme }) => theme.sizes.text.L};
 	font-family: ${({ theme }) => theme.fonts.primary};
 `;

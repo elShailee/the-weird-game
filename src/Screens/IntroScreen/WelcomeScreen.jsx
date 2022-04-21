@@ -11,7 +11,7 @@ export const WelcomeScreen = ({ animationTimings }) => {
 		delay: animationTimings.delay,
 	});
 
-	const welcomeText = texts.chapter00.welcome;
+	const welcomeText = texts.introScreen.welcome;
 
 	return (
 		<>

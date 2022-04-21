@@ -3,7 +3,7 @@ import { Text } from 'Texts/Text';
 import { HiddenMessageTextContainer } from './styles';
 
 export const HiddenMessageScreen = () => {
-	const hiddenMessageText = texts.chapter00.hiddenMessage;
+	const hiddenMessageText = texts.introScreen.hiddenMessage;
 	return (
 		<HiddenMessageTextContainer>
 			<Text>{hiddenMessageText}</Text>

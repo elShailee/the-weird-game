@@ -31,7 +31,7 @@ export const DialogScreen = () => {
 	});
 
 	// texts
-	const introductionTexts = texts.chapter00.introduction;
+	const introductionTexts = texts.introScreen.introduction;
 	const selectedDialog = useMemo(() => {
 		return Lodash.sample(introductionTexts.dialogsSelection);
 	}, [introductionTexts]);

@@ -1,5 +1,5 @@
 export const texts = {
-	chapter00: {
+	introScreen: {
 		hiddenMessage: 'trust no one.',
 		welcome: ['Welcome to', 'The Weird Game'],
 		introduction: {

@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-export const ChapterContainer = styled.div`
+export const ScreenContainer = styled.div`
 	${({ theme }) => theme.customStyles.screenSized}
 	${({ theme }) => theme.customStyles.nonSelectable}
   ${({ theme }) => theme.customStyles.centerItems}
   font-size:${({ theme }) => theme.sizes.text.M};
 	font-family: ${({ theme }) => theme.fonts.primary};
-	background-color: ${({ theme }) => theme.colors.chapter01.BG};
-	color: ${({ theme }) => theme.colors.chapter01.text.light};
+	background-color: ${({ theme }) => theme.colors.moneyScreen.BG};
+	color: ${({ theme }) => theme.colors.moneyScreen.text.light};
 `;
 
 export const SumContainer = styled.div`
@@ -41,4 +41,12 @@ export const DialogContainer = styled.div`
 	border-radius: ${({ theme }) => theme.sizes.borderRadius.M};
 	top: 2rem;
 	font-size: ${({ theme }) => theme.sizes.text.M};
+`;
+
+export const Credits = styled.div`
+	color: ${({ theme }) => theme.colors.moneyScreen.text.faded};
+	position: absolute;
+	right: ${({ theme }) => theme.sizes.padding.XXL};
+	bottom: ${({ theme }) => theme.sizes.padding.XXL};
+	font-size: ${({ theme }) => theme.sizes.text.S};
 `;
