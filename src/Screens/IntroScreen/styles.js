@@ -25,8 +25,8 @@ export const IntroductionScreenContainer = styled(animated.div)`
 	${({ theme }) => theme.customStyles.centerItems}
 	${({ theme }) => theme.customStyles.nonSelectable}
 	padding: ${({ theme }) => theme.sizes.padding.XL};
-	background-color: ${({ theme }) => theme.colors.introScreen.dialogBG};
-	color: ${({ theme }) => theme.colors.introScreen.dialogText};
+	background-color: ${({ theme }) => theme.colors.introScreen.dialogScreenBG};
+	color: ${({ theme }) => theme.colors.introScreen.dialogScreenText};
 	font-size: ${({ theme }) => theme.sizes.text.L};
 	font-family: ${({ theme }) => theme.fonts.primary};
 `;

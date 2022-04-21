@@ -3,7 +3,7 @@ import { useState, createContext, useContext } from 'react';
 export const ScreensContext = createContext();
 
 export function ScreensProvider(props) {
-	const [currentScreenTitle, setCurrentScreenByTitle] = useState('money');
+	const [currentScreenTitle, setCurrentScreenByTitle] = useState('intro');
 
 	return (
 		<ScreensContext.Provider value={{ currentScreenTitle, setCurrentScreenByTitle }}>

@@ -7,19 +7,17 @@ import { IntroductionScreenContainer, ClickHintContainer } from './styles';
 import { KeyDownHandler, SwipeHandler } from 'Utils/inputUtils';
 import { useScreensContext } from 'Context/ScreensContext';
 
-export const DialogScreen = () => {
+export const DialogScreen = ({ animationsTimings }) => {
 	const [dialogLineIndexState, setDialogLineIndexState] = useState(0);
 	const [isTextFadingOutState, setIsTextFadingOutState] = useState(false);
+	const [isUnmountingState, setIsUnmountingState] = useState(false);
 	const { setCurrentScreenByTitle } = useScreensContext();
 
 	// animations
-	const textFadeDuration = 500;
-	const clickHintAnimationDelay = 4000;
-
 	const basicFadeAnimationObject = {
 		from: { opacity: 0 },
 		to: { opacity: 1 },
-		config: { duration: textFadeDuration },
+		config: { duration: animationsTimings.textFadeDuration },
 	};
 	const mainTextFadeAnimation = useSpring({
 		...basicFadeAnimationObject,
@@ -27,7 +25,7 @@ export const DialogScreen = () => {
 	});
 	const clickHintFadeAnimation = useSpring({
 		...basicFadeAnimationObject,
-		delay: clickHintAnimationDelay,
+		delay: animationsTimings.clickHintAnimationDelay,
 	});
 
 	// texts
@@ -52,16 +50,19 @@ export const DialogScreen = () => {
 		}
 	};
 	const dialogLineChange = newLineIndex => {
-		setIsTextFadingOutState(true);
+		const hasDialogEnded = newLineIndex >= selectedDialog.length;
+		!hasDialogEnded && setIsTextFadingOutState(true);
 		setTimeout(() => {
-			const hasDialogEnded = newLineIndex >= selectedDialog.length;
 			if (hasDialogEnded) {
-				return setCurrentScreenByTitle('money');
+				setIsUnmountingState(true);
+				setTimeout(() => {
+					return setCurrentScreenByTitle('money');
+				}, animationsTimings.screenFadeDuration);
 			} else {
 				setDialogLineIndexState(newLineIndex);
+				setIsTextFadingOutState(false);
 			}
-			setIsTextFadingOutState(false);
-		}, textFadeDuration);
+		}, animationsTimings.textFadeDuration);
 	};
 
 	// keypress handle func
@@ -87,10 +88,17 @@ export const DialogScreen = () => {
 		down: dialogLineRewind,
 	};
 
+	const fadingAnimation = useSpring({
+		to: { opacity: 0 },
+		from: { opacity: 1 },
+		config: { duration: animationsTimings.screenFadeDuration },
+		pause: !isUnmountingState,
+	});
+
 	return (
 		<SwipeHandler handleSwipes={handleSwipes}>
 			<KeyDownHandler handleKeyDown={handleKeyDown}>
-				<IntroductionScreenContainer onClick={dialogLineSkip}>
+				<IntroductionScreenContainer onClick={dialogLineSkip} style={fadingAnimation}>
 					<animated.div style={mainTextFadeAnimation}>
 						<Text>{selectedDialog[dialogLineIndexState]}</Text>
 						{clickHint}
