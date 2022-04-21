@@ -6,3 +6,9 @@ export const useCurrentScreen = () => {
 	const screenComponent = screensLib[currentScreenTitle];
 	return screenComponent;
 };
+
+export const useNextScreen = () => {
+	const { nextScreenTitle } = useScreensContext();
+	const screenComponent = screensLib[nextScreenTitle];
+	return screenComponent;
+};

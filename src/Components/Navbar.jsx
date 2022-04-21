@@ -1,11 +1,9 @@
 import { usePlayerDataContext } from 'Context/PlayerDataContext';
-import { useScreensContext } from 'Context/ScreensContext';
 import styled from 'styled-components';
 import { useTheme } from 'styled-components';
 import { SquareButton } from './buttons';
 
-export const Navbar = ({ isOpen, closeNavbar }) => {
-	const { setCurrentScreenByTitle } = useScreensContext();
+export const Navbar = ({ isOpen, closeNavbar, fadeToScreen }) => {
 	const navbarButtons = usePlayerDataContext().playerDataState.navbarButtons;
 	const theme = useTheme();
 
@@ -16,7 +14,7 @@ export const Navbar = ({ isOpen, closeNavbar }) => {
 			const { icon } = buttonProps;
 			const clickHandler = () => {
 				if (buttonTitle === 'closeNavbar') closeNavbar();
-				else setCurrentScreenByTitle(buttonTitle);
+				else fadeToScreen(buttonTitle);
 			};
 			return (
 				<NavButton

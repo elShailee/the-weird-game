@@ -12,7 +12,7 @@ import {
 	Credits,
 } from './styles';
 
-export const MoneyScreen = () => {
+export const MoneyScreen = ({ screenFadeAnimation }) => {
 	const theme = useContext(ThemeContext);
 	const { playerDataState, setPlayerDataState } = usePlayerDataContext();
 	const [dialogStageState, setDialogStageState] = useState(0);
@@ -57,7 +57,7 @@ export const MoneyScreen = () => {
 	// };
 
 	return (
-		<ScreenContainer>
+		<ScreenContainer style={screenFadeAnimation}>
 			<SumContainer shouldShow={sumPoints() > 0}>{playerDataState.money}</SumContainer>
 			<FloatingActionButton
 				onClick={addHandler}

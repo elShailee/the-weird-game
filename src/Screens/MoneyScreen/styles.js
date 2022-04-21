@@ -1,6 +1,7 @@
+import { animated } from 'react-spring';
 import styled from 'styled-components';
 
-export const ScreenContainer = styled.div`
+export const ScreenContainer = styled(animated.div)`
 	${({ theme }) => theme.customStyles.screenSized}
 	${({ theme }) => theme.customStyles.nonSelectable}
   ${({ theme }) => theme.customStyles.centerItems}
