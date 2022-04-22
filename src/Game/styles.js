@@ -9,3 +9,11 @@ export const NavbarOpenButton = styled(SquareButton)`
 	transition: opacity 1s ease-out;
 	cursor: ${({ isVisible }) => (isVisible ? 'pointer' : 'default')};
 `;
+
+export const GameContainer = styled.div`
+	${({ isScreenFadingState }) => {
+		if (isScreenFadingState) {
+			return `pointer-events:none;`;
+		}
+	}}
+`;

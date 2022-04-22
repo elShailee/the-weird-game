@@ -33,7 +33,7 @@ export const Navbar = ({ isOpen, closeNavbar, fadeToScreen }) => {
 };
 
 const NavBarContainer = styled.div`
-	position: absolute;
+	position: fixed;
 	height: 100vh;
 	background-color: ${({ theme }) => theme.colors.navbar.BG};
 	${({ theme }) => theme.shadows.L}

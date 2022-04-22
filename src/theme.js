@@ -96,7 +96,7 @@ export const theme = {
 		},
 		moneyScreen: {
 			BG: palette.blue[350],
-			focusBG: palette.blue[620],
+			focusBG: palette.orange[600],
 			text: {
 				light: palette.white[900],
 				faded: palette.blue[620],

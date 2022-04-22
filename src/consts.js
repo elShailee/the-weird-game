@@ -1,3 +1,3 @@
 export const CONSTS = {
-	moneyToNavbar: 5,
+	moneyToNavbar: 20,
 };

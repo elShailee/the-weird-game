@@ -1,7 +1,7 @@
 import { Navbar } from 'Components/Navbar';
 import { useState } from 'react';
 import { useCurrentScreen, useNextScreen } from 'Utils/screensUtils';
-import { NavbarOpenButton } from './styles';
+import { NavbarOpenButton, GameContainer } from './styles';
 import { usePlayerDataContext } from 'Context/PlayerDataContext';
 import { useTheme } from 'styled-components';
 import { useSpring } from 'react-spring';
@@ -31,13 +31,13 @@ export const Game = () => {
 		setIsScreenFadingState(true);
 		setTimeout(() => {
 			setCurrentScreenByTitle(screenTitle);
-			setIsScreenFadingState(false);
 			setNextScreenByTitle(null);
+			setIsScreenFadingState(false);
 		}, 500);
 	};
 
 	return (
-		<>
+		<GameContainer isScreenFadingState={isScreenFadingState}>
 			{NextScreen && <NextScreen key='nextScreen' />}
 			{CurrentScreen ? (
 				<CurrentScreen
@@ -63,6 +63,6 @@ export const Game = () => {
 				closeNavbar={() => setNavberOpenState(false)}
 				fadeToScreen={fadeToScreen}
 			/>
-		</>
+		</GameContainer>
 	);
 };
