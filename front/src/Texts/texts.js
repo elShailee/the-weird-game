@@ -1,7 +1,9 @@
 export const texts = {
-	chapter00: {
+	welcomeScreen: {
+		welcomeText: ['Welcome to', 'The Weird Game'],
 		hiddenMessage: 'trust no one.',
-		welcome: ['Welcome to', 'The Weird Game'],
+	},
+	introScreen: {
 		introduction: {
 			dialogsSelection: [
 				[

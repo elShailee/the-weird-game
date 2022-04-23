@@ -1,4 +1,3 @@
-import { useChaptersContext } from 'Context/ChaptersContext';
 import { Text } from 'Texts/Text';
 import { texts } from 'Texts/texts';
 import { useMemo, useState } from 'react';
@@ -6,20 +5,23 @@ import { useSpring, animated } from 'react-spring';
 import Lodash from 'lodash';
 import { IntroductionScreenContainer, ClickHintContainer } from './styles';
 import { KeyDownHandler, SwipeHandler } from 'Utils/inputUtils';
+import { useScreensContext } from 'Context/ScreensContext';
 
-export const IntroductionScreen = () => {
-	const [dialogLineIndexState, setDialogLineIndexState] = useState(0);
+export const IntroScreen = ({ screenFadeAnimation, fadeToScreen }) => {
+	const animationsTimings = {
+		textFadeDuration: 500,
+		clickHintAnimationDelay: 4000,
+	};
+
+	const [introLineIndexState, setIntroLineIndexState] = useState(0);
 	const [isTextFadingOutState, setIsTextFadingOutState] = useState(false);
-	const { skipChapter } = useChaptersContext();
+	const { currentScreenTitle } = useScreensContext();
 
 	// animations
-	const textFadeDuration = 500;
-	const clickHintAnimationDelay = 4000;
-
 	const basicFadeAnimationObject = {
 		from: { opacity: 0 },
 		to: { opacity: 1 },
-		config: { duration: textFadeDuration },
+		config: { duration: animationsTimings.textFadeDuration },
 	};
 	const mainTextFadeAnimation = useSpring({
 		...basicFadeAnimationObject,
@@ -27,15 +29,15 @@ export const IntroductionScreen = () => {
 	});
 	const clickHintFadeAnimation = useSpring({
 		...basicFadeAnimationObject,
-		delay: clickHintAnimationDelay,
+		delay: animationsTimings.clickHintAnimationDelay,
 	});
 
 	// texts
-	const introductionTexts = texts.chapter00.introduction;
+	const introductionTexts = texts.introScreen.introduction;
 	const selectedDialog = useMemo(() => {
 		return Lodash.sample(introductionTexts.dialogsSelection);
 	}, [introductionTexts]);
-	const isOnFirstDialogLine = dialogLineIndexState === 0;
+	const isOnFirstDialogLine = introLineIndexState === 0;
 	const clickHint = isOnFirstDialogLine && (
 		<ClickHintContainer style={clickHintFadeAnimation}>
 			<Text>{introductionTexts.clickHint}</Text>
@@ -44,24 +46,26 @@ export const IntroductionScreen = () => {
 
 	// dialog line funcs
 	const dialogLineSkip = () => {
-		dialogLineChange(dialogLineIndexState + 1);
+		dialogLineChange(introLineIndexState + 1);
 	};
 	const dialogLineRewind = () => {
-		if (dialogLineIndexState > 0) {
-			dialogLineChange(dialogLineIndexState - 1);
+		if (introLineIndexState > 0) {
+			dialogLineChange(introLineIndexState - 1);
 		}
 	};
 	const dialogLineChange = newLineIndex => {
+		const hasDialogEnded = newLineIndex >= selectedDialog.length;
 		setIsTextFadingOutState(true);
 		setTimeout(() => {
-			const hasDialogEnded = newLineIndex >= selectedDialog.length;
 			if (hasDialogEnded) {
-				return skipChapter();
+				setTimeout(() => {
+					fadeToScreen('money');
+				}, animationsTimings.textFadeDuration);
 			} else {
-				setDialogLineIndexState(newLineIndex);
+				setIntroLineIndexState(newLineIndex);
+				setIsTextFadingOutState(false);
 			}
-			setIsTextFadingOutState(false);
-		}, textFadeDuration);
+		}, animationsTimings.textFadeDuration);
 	};
 
 	// keypress handle func
@@ -90,11 +94,13 @@ export const IntroductionScreen = () => {
 	return (
 		<SwipeHandler handleSwipes={handleSwipes}>
 			<KeyDownHandler handleKeyDown={handleKeyDown}>
-				<IntroductionScreenContainer onClick={dialogLineSkip}>
-					<animated.div style={mainTextFadeAnimation}>
-						<Text>{selectedDialog[dialogLineIndexState]}</Text>
-						{clickHint}
-					</animated.div>
+				<IntroductionScreenContainer onClick={dialogLineSkip} style={screenFadeAnimation}>
+					{currentScreenTitle === 'intro' && (
+						<animated.div style={mainTextFadeAnimation}>
+							<Text>{selectedDialog[introLineIndexState]}</Text>
+							{clickHint}
+						</animated.div>
+					)}
 				</IntroductionScreenContainer>
 			</KeyDownHandler>
 		</SwipeHandler>
