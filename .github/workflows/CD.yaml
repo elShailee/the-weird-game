@@ -1,6 +1,9 @@
 name: weird CD
 
-on: push
+on:
+  push:
+    branches:
+      - 'master'
 
 env:
   APP_NAME: The-Weird-Game
