@@ -1,7 +1,7 @@
 name: weird CD
 
 on:
-  commit:
+  push:
     branches:
       - 'master'
 
