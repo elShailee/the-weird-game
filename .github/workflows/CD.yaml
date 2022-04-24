@@ -3,17 +3,19 @@ name: weird CD
 on:
   push:
     branches:
-      - 'master'
+      - '*'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps:
-      - name: Create ssh pem key
-        run: echo ${{secrets.EC2_SSH_PEM_KEY}} > pem_key.pem
 
-      - name: Connect to ssh
-        run: ssh -i pem_key.pem ${{secrets.EC2_ADDRESS}}
-
-      - name: run deploy script on EC2
-        run: ls
+      - name: multiple command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_KEY }}
+          port: ${{ secrets.EC2_PORT }}
+          script: |
+            whoami
+            ls -al
