@@ -19,6 +19,6 @@ app.listen(PORT, () => console.log(`Listening for requests on port ${PORT}...`))
 
 app.use(express.static(path.join(__dirname, 'build')));
 
-app.get('/weird/', function (req, res) {
+app.get('/The-Weird-Game', function (req, res) {
 	res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
