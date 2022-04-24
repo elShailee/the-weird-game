@@ -3,7 +3,7 @@ name: weird CD
 on:
   push:
     branches:
-      - 'master'
+      - '*'
 
 jobs:
   deploy:
