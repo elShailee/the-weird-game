@@ -9,11 +9,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Create ssh pem key
-        run: echo ${{secrets.EC2_SSH_PEM_KEY}} > pem_key.pem
-
-      - name: Connect to ssh
-        run: ssh -i pem_key.pem ${{secrets.EC2_ADDRESS}}
-
-      - name: run deploy script on EC2
-        run: ls
+      - name: multiple command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            whoami
+            ls -al
