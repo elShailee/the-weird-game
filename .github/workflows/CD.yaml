@@ -1,9 +1,6 @@
 name: weird CD
 
-on:
-  push:
-    branches:
-      - 'master'
+on: push
 
 env:
   APP_NAME: The-Weird-Game
@@ -20,10 +17,10 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           port: ${{ secrets.EC2_PORT }}
           script: |
-            sudo pm2 delete $APP_NAME
-            sudo rm -rf $APP_NAME/
-            git clone https://github.com/elShailee/$APP_NAME.git
-            cd $APP_NAME/front/
+            sudo pm2 delete The-Weird-Game
+            sudo rm -rf The-Weird-Game/
+            git clone https://github.com/elShailee/The-Weird-Game.git
+            cd The-Weird-Game/front/
             sudo yarn
             sudo yarn build
             cd ..
@@ -31,7 +28,7 @@ jobs:
             cd back
             sudo yarn
             cd ~
-            sudo rm -rf static_files/$APP_NAME/
-            sudo mkdir -p static_files/$APP_NAME
-            sudo mv $APP_NAME/back/build/static/* static_files/$APP_NAME/
-            sudo pm2 start $APP_NAME/back/index.js --name $APP_NAME
+            sudo rm -rf static_files/The-Weird-Game/
+            sudo mkdir -p static_files/The-Weird-Game
+            sudo mv The-Weird-Game/back/build/static/* static_files/The-Weird-Game/
+            sudo pm2 start The-Weird-Game/back/index.js --name The-Weird-Game
