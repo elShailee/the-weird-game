@@ -1,7 +1,7 @@
 name: weird CD
 
 on:
-  push:
+  commit:
     branches:
       - 'master'
 
@@ -20,10 +20,10 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           port: ${{ secrets.EC2_PORT }}
           script: |
-            sudo pm2 delete $APP_NAME
-            sudo rm -rf $APP_NAME/
-            git clone https://github.com/elShailee/$APP_NAME.git
-            cd $APP_NAME/front/
+            sudo pm2 delete ${{env.APP_NAME}}
+            sudo rm -rf ${{env.APP_NAME}}/
+            git clone https://github.com/elShailee/${{env.APP_NAME}}.git
+            cd ${{env.APP_NAME}}/front/
             sudo yarn
             sudo yarn build
             cd ..
@@ -31,7 +31,7 @@ jobs:
             cd back
             sudo yarn
             cd ~
-            sudo rm -rf static_files/$APP_NAME/
-            sudo mkdir -p static_files/$APP_NAME
-            sudo mv $APP_NAME/back/build/static/* static_files/$APP_NAME/
-            sudo pm2 start $APP_NAME/back/index.js --name $APP_NAME
+            sudo rm -rf static_files/${{env.APP_NAME}}/
+            sudo mkdir -p static_files/${{env.APP_NAME}}
+            sudo mv ${{env.APP_NAME}}/back/build/static/* static_files/${{env.APP_NAME}}/
+            sudo pm2 start ${{env.APP_NAME}}/back/index.js --name ${{env.APP_NAME}}
