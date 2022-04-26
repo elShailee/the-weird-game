@@ -96,10 +96,14 @@ export const theme = {
 		},
 		moneyScreen: {
 			BG: palette.blue[350],
-			focusBG: palette.orange[600],
+			dialog: {
+				focusBG: palette.orange[600],
+				transparentBG: palette.transparent,
+			},
 			text: {
 				light: palette.white[900],
 				faded: palette.blue[620],
+				transparent: palette.transparent,
 			},
 			addButton: {
 				BG: palette.orange[900],

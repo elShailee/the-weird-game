@@ -2,38 +2,28 @@ import { FloatingActionButton } from 'Components/buttons';
 import { Link } from 'Components/texts';
 import { usePlayerDataContext } from 'Context/PlayerDataContext';
 import { cloneDeep } from 'lodash';
-import { useContext, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { ThemeContext } from 'styled-components';
-import { ScreenContainer, SumContainer, DialogContainer, Credits } from './styles';
+import { texts } from 'Texts/texts';
+import { useMoneyEarned } from 'Utils/moneyUtils';
+import { ScreenContainer, BalanceContainer, DialogContainer, Credits } from './styles';
+import { changeDialogWithHighlight, getCurrentDialogStage } from './utils';
 
-export const MoneyScreen = ({ screenFadeAnimation }) => {
+export const MoneyScreen = ({ screenFadeAnimation, isDisplayedAsCurrentScreen }) => {
 	const theme = useContext(ThemeContext);
 	const { playerDataState, setPlayerDataState } = usePlayerDataContext();
-	const [dialogStageState, setDialogStageState] = useState(0);
+	const dialog = texts.moneyScreen.mainScreenDialog;
+	const [dialogStageState, setDialogStageState] = useState(-1);
 	const dialogRef = useRef();
+	const currentMoneyEarned = useMoneyEarned();
 
-	const dialog = [
-		'hey there',
-		"why'd you do that for?!",
-		"I get it, there isn't much else, is it...",
-		'but seriously, stop it.',
-		'Stop It!',
-		'',
-	];
+	useEffect(() => {
+		const newDialogStage = getCurrentDialogStage(currentMoneyEarned);
+		if (newDialogStage !== null && newDialogStage !== dialogStageState)
+			changeDialogWithHighlight({ newDialogStage, dialogRef, setDialogStageState, theme });
+	}, [theme, isDisplayedAsCurrentScreen, dialogStageState, playerDataState, currentMoneyEarned]);
 
-	const sumPoints = () => playerDataState.money + playerDataState.spentMoney;
-	const highlightDialog = () => {
-		const { style } = dialogRef.current;
-		style.transition = 'background-color 300ms ease-in';
-		style.backgroundColor = theme.colors.moneyScreen.focusBG;
-		setTimeout(() => {
-			style.transition = 'background-color 1.5s ease-out';
-			style.backgroundColor = 'rgba(0,0,0,0)';
-		}, 300);
-	};
-
-	const addHandler = () => {
-		highlightDialog();
+	const addMoneyClickHandler = () => {
 		const newPlayerDataState = cloneDeep(playerDataState);
 		newPlayerDataState.money = newPlayerDataState.money + 1;
 		const buttonObj = newPlayerDataState.navbarButtons['money'];
@@ -43,17 +33,22 @@ export const MoneyScreen = ({ screenFadeAnimation }) => {
 
 	return (
 		<ScreenContainer style={screenFadeAnimation}>
-			<SumContainer shouldShow={sumPoints() > 0}>{playerDataState.money}</SumContainer>
+			{isDisplayedAsCurrentScreen && (
+				<DialogContainer ref={dialogRef}>{dialog[dialogStageState]}</DialogContainer>
+			)}
+
+			<BalanceContainer shouldShow={currentMoneyEarned > 0}>
+				{playerDataState.money}
+			</BalanceContainer>
+
 			<FloatingActionButton
-				onClick={addHandler}
-				style={{ margin: '1rem' }}
-				tabIndex='-1'
+				onClick={addMoneyClickHandler}
 				color={theme.colors.moneyScreen.addButton.BG}
 				size='L'
 			>
 				+
 			</FloatingActionButton>
-			<DialogContainer ref={dialogRef}>{dialog[dialogStageState]}</DialogContainer>
+
 			<Credits>
 				inspired by <Link href='https://candybox2.github.io/candybox/'>Candy Box</Link>
 			</Credits>

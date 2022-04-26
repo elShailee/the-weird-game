@@ -1,6 +1,7 @@
 // numbering convention is single digits Brightness-Saturation-opacity, 0 is 10.
 
 const palette = {
+	transparent: `rgba(0, 0, 0, 0)`,
 	gray: {
 		200: `rgb(20, 20, 20)`,
 		502: `rgba(128, 128, 128, 0.2)`,

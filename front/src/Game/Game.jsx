@@ -2,17 +2,18 @@ import { Navbar } from 'Components/Navbar';
 import { useState } from 'react';
 import { useCurrentScreen, useNextScreen } from 'Utils/screensUtils';
 import { NavbarOpenButton, GameContainer } from './styles';
-import { usePlayerDataContext } from 'Context/PlayerDataContext';
 import { useTheme } from 'styled-components';
 import { useSpring } from 'react-spring';
 import { useScreensContext } from 'Context/ScreensContext';
+import { CONSTS } from 'consts';
+import { useMoneyEarned } from 'Utils/moneyUtils';
 
 export const Game = () => {
 	const theme = useTheme();
 	const CurrentScreen = useCurrentScreen();
 	const NextScreen = useNextScreen();
 	const [navbarOpenState, setNavberOpenState] = useState(false);
-	const { isNavbarAvailable } = usePlayerDataContext();
+	const isNavbarAvailable = useMoneyEarned() >= CONSTS.moneyToNavbar;
 	const [isScreenFadingState, setIsScreenFadingState] = useState(false);
 	const { currentScreenTitle, setCurrentScreenByTitle, setNextScreenByTitle } = useScreensContext();
 
@@ -38,12 +39,13 @@ export const Game = () => {
 
 	return (
 		<GameContainer isScreenFadingState={isScreenFadingState}>
-			{NextScreen && <NextScreen key='nextScreen' />}
+			{NextScreen && <NextScreen key='nextScreen' isDisplayedAsCurrentScreen={false} />}
 			{CurrentScreen ? (
 				<CurrentScreen
 					key='currentScreen'
 					screenFadeAnimation={screenFadeAnimation}
 					fadeToScreen={fadeToScreen}
+					isDisplayedAsCurrentScreen={true}
 				/>
 			) : (
 				<div>Game Fallback</div>

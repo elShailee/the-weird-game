@@ -12,7 +12,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: multiple command
+      - name: Actual Deployment of ${{env.APP_NAME}}
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}

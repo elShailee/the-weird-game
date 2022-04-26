@@ -1,4 +1,3 @@
-import { CONSTS } from 'consts';
 import { useState, createContext, useContext } from 'react';
 
 export const PlayerDataContext = createContext();
@@ -15,11 +14,9 @@ export function PlayerDataProvider(props) {
 		},
 	};
 	const [playerDataState, setPlayerDataState] = useState(initialState);
-	const isNavbarAvailable =
-		playerDataState.money + playerDataState.spentMoney >= CONSTS.moneyToNavbar;
 
 	return (
-		<PlayerDataContext.Provider value={{ playerDataState, setPlayerDataState, isNavbarAvailable }}>
+		<PlayerDataContext.Provider value={{ playerDataState, setPlayerDataState }}>
 			{props.children}
 		</PlayerDataContext.Provider>
 	);
