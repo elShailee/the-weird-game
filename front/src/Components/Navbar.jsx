@@ -36,12 +36,12 @@ const NavBarContainer = styled.div`
 	position: fixed;
 	height: 100vh;
 	background-color: ${({ theme }) => theme.colors.navbar.BG};
-	${({ theme }) => theme.shadows.L}
+	box-shadow: ${({ theme }) => theme.shadows.L};
 	left: ${({ isOpen }) => (isOpen ? '0' : '-6rem')};
 	transition: left 1s;
 `;
 
 const NavButton = styled(SquareButton)`
 	margin: ${({ theme }) => theme.sizes.padding.M};
-	${({ theme }) => theme.shadows.Min}
+	box-shadow: ${({ theme }) => theme.shadows.Min};
 `;

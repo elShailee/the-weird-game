@@ -30,7 +30,7 @@ export const DialogContainer = styled.div`
 	position: absolute;
 	padding: ${({ theme }) => theme.sizes.padding.M} ${({ theme }) => theme.sizes.padding.XL};
 	border-radius: ${({ theme }) => theme.sizes.borderRadius.M};
-	top: 2rem;
+	bottom: 5rem;
 	font-size: ${({ theme }) => theme.sizes.text.M};
 `;
 

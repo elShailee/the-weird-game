@@ -26,8 +26,6 @@ export const MoneyScreen = ({ screenFadeAnimation, isDisplayedAsCurrentScreen })
 	const addMoneyClickHandler = () => {
 		const newPlayerDataState = cloneDeep(playerDataState);
 		newPlayerDataState.money = newPlayerDataState.money + 1;
-		const buttonObj = newPlayerDataState.navbarButtons['money'];
-		buttonObj.isActive = true;
 		setPlayerDataState(newPlayerDataState);
 	};
 

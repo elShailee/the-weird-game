@@ -8,9 +8,8 @@ export function PlayerDataProvider(props) {
 		spentMoney: 0,
 		navbarButtons: {
 			closeNavbar: { icon: '<', isActive: true },
-			money: { icon: '$', isActive: false },
-			welcome: { icon: ':)', isActive: true },
-			intro: { icon: '...', isActive: true },
+			money: { icon: '$', isActive: true },
+			shop: { icon: '&', isActive: true },
 		},
 	};
 	const [playerDataState, setPlayerDataState] = useState(initialState);
