@@ -12,6 +12,7 @@ export const theme = {
 			S: '0.25rem',
 			M: '0.5rem',
 			L: '0.75rem',
+			XL: '1rem',
 			Max: '50%',
 		},
 		padding: {
@@ -54,9 +55,12 @@ export const theme = {
 		},
 	},
 	shadows: {
-		Min: 'box-shodow: 0;',
-		S: 'box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.25), 0px 6px 10px 0px rgba(0, 0, 0, 0.2), 0px 1px 18px 0px rgba(0, 0, 0, 0.16);',
-		L: 'box-shadow: 0px 7px 8px -4px rgb(0, 0, 0, 0.25), 0px 12px 17px 2px rgb(0, 0, 0, 0.2),	0px 5px 22px 4px rgb(0, 0, 0, 0.16);',
+		Min: '0',
+		S: '0px 3px 5px -1px rgba(0, 0, 0, 0.25), 0px 6px 10px 0px rgba(0, 0, 0, 0.2), 0px 1px 18px 0px rgba(0, 0, 0, 0.16)',
+		L: '0px 7px 8px -4px rgb(0, 0, 0, 0.25), 0px 12px 17px 2px rgb(0, 0, 0, 0.2),	0px 5px 22px 4px rgb(0, 0, 0, 0.16)',
+	},
+	innerGlows: {
+		S: 'inset 2px -2px 10px 0px rgba(255, 255, 255, 0.1), inset 0px 0px 20px rgba(255, 255, 255, 0.05)',
 	},
 	fonts: {
 		primary: "'Noto Serif', serif",
@@ -85,6 +89,7 @@ export const theme = {
 			width: 100vw;
 			height: 100vh;
 			box-sizing: border-box;
+			overflow:hidden;
 		`,
 	},
 	colors: {
@@ -96,14 +101,25 @@ export const theme = {
 		},
 		moneyScreen: {
 			BG: palette.blue[350],
-			focusBG: palette.orange[600],
+			dialog: {
+				focusBG: palette.orange[600],
+				transparentBG: palette.transparent,
+			},
 			text: {
-				light: palette.white[900],
+				light: palette.gray[900],
 				faded: palette.blue[620],
+				transparent: palette.transparent,
 			},
 			addButton: {
 				BG: palette.orange[900],
-				text: palette.white[900],
+				text: palette.gray[900],
+			},
+		},
+		shopScreen: {
+			BG: palette.purple[200],
+			titleText: palette.blue[910],
+			card: {
+				BG: palette.purple[400],
 			},
 		},
 		navbar: {
@@ -114,17 +130,17 @@ export const theme = {
 		inputs: {
 			disabled: {
 				text: palette.gray[900],
-				BG: palette.blue[720],
+				BG: palette.blue[610],
 			},
 			dark: {
 				text: 'black',
 			},
 			light: {
-				text: palette.white[900],
+				text: palette.gray[900],
 			},
 		},
 		defaults: {
-			text: palette.white[900],
+			text: palette.gray[900],
 		},
 	},
 };

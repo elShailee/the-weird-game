@@ -21,7 +21,7 @@ export const GeneralButton = styled.div`
 
 	${({ theme }) => theme.customStyles.centerItems};
 	${({ theme }) => theme.customStyles.nonSelectable};
-	${({ theme }) => theme.shadows.S}
+	box-shadow: ${({ theme }) => theme.shadows.S};
 	${({ theme, disabled }) => {
 		if (!disabled) return theme.customStyles.clickable;
 	}};
@@ -32,7 +32,7 @@ export const GeneralButton = styled.div`
 			if (darken) return theme.filters.darken.S;
 			return theme.filters.lighten.S;
 		}};
-		${({ disabled, theme }) => (disabled ? '' : theme.shadows.L)}
+		${({ disabled, theme }) => (disabled ? '' : `box-shadow:${theme.shadows.L};`)}
 	}
 
 	&:active {

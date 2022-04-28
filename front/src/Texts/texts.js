@@ -26,4 +26,15 @@ export const texts = {
 			clickHint: '(this is when you click...)',
 		},
 	},
+	moneyScreen: {
+		currencySuffix: '$',
+		mainScreenDialog: {
+			0: "Don't.",
+			1: "Please don't!",
+			5: "Tempting, isn't it?",
+			10: 'Okay,',
+			15: "Don't say I haven't warned you…",
+			20: 'Wait, do I know you from somewhere?',
+		},
+	},
 };

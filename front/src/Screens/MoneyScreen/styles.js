@@ -11,7 +11,7 @@ export const ScreenContainer = styled(animated.div)`
 	color: ${({ theme }) => theme.colors.moneyScreen.text.light};
 `;
 
-export const SumContainer = styled.div`
+export const BalanceContainer = styled.div`
 	position: absolute;
 	top: ${({ shouldShow }) => (shouldShow ? '20vh' : '40vh')};
 	height: ${({ shouldShow }) => (shouldShow ? '5rem' : '0')};
@@ -26,21 +26,11 @@ export const SumContainer = styled.div`
 	}
 `;
 
-// export const TrashButton = styled.button`
-// 	border-radius: 5px;
-// 	height: 2rem;
-// 	position: absolute;
-// 	bottom: 5rem;
-// 	right: 3rem;
-// 	opacity: ${({ shouldShow }) => (shouldShow ? '1' : '0')};
-// 	transition: opacity 1s;
-// `;
-
 export const DialogContainer = styled.div`
 	position: absolute;
 	padding: ${({ theme }) => theme.sizes.padding.M} ${({ theme }) => theme.sizes.padding.XL};
 	border-radius: ${({ theme }) => theme.sizes.borderRadius.M};
-	top: 2rem;
+	bottom: 5rem;
 	font-size: ${({ theme }) => theme.sizes.text.M};
 `;
 
