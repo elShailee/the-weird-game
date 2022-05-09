@@ -3,7 +3,7 @@ import { useState, createContext, useContext } from 'react';
 export const ScreensContext = createContext();
 
 export function ScreensProvider(props) {
-	const [currentScreenTitle, setCurrentScreenByTitle] = useState('welcome');
+	const [currentScreenTitle, setCurrentScreenByTitle] = useState('shop');
 	const [nextScreenTitle, setNextScreenByTitle] = useState(null);
 
 	return (

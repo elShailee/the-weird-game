@@ -91,6 +91,13 @@ export const theme = {
 			box-sizing: border-box;
 			overflow:hidden;
 		`,
+		hideScrollbar: `
+			::-webkit-scrollbar {
+			display: none;
+			}
+			-ms-overflow-style: none; /* IE and Edge */
+			scrollbar-width: none; /* Firefox */
+		`,
 	},
 	colors: {
 		introScreen: {
