@@ -1,45 +1,181 @@
 import React, { useState } from 'react';
+import { Header, ScreenContainer } from './styles';
 import {
-	Header,
-	ScreenContainer,
-	ShopContainer,
-	ItemsGrid,
-	ItemContainer,
-	EmptyGridCell,
+	ContentContainer,
 	Item,
-	GridContainer,
-	PlaceHolder,
-} from './styles';
+	ItemsGrid,
+	ItemsGridContainer,
+	ItemWindowContainer,
+} from './tempStyles';
 
 export const ShopScreen = ({ screenFadeAnimation }) => {
-	const [colsState, setColsState] = useState(16);
-	const Cells = [];
-	const clickHandler = () => {
-		colsState === 16 ? setColsState(9) : setColsState(16);
+	const [selectedItemState, setSelectedItem] = useState(false);
+
+	// scroll handling
+	const scrollHandler = e => {
+		const tar = e.target;
+		const isTopScrolled = tar.scrollTop === 0;
+		const isBottomScrolled = Math.abs(tar.scrollHeight - tar.scrollTop - tar.clientHeight) < 1;
+		console.log(`top: ${isTopScrolled}\nbottom: ${isBottomScrolled}`);
 	};
-
-	Cells.push(
-		<ItemContainer key='banana'>
-			<Item onClick={clickHandler} key='asdasd' />
-		</ItemContainer>,
-	);
-
-	for (let i = 8; i < 16 * 9; i++) {
-		Cells.push(<EmptyGridCell key={i} />);
-	}
 
 	return (
 		<ScreenContainer style={screenFadeAnimation}>
 			<Header>The Weird Shop</Header>
-
-			<ShopContainer>
-				<GridContainer>
-					<ItemsGrid rows={9} cols={colsState}>
-						{Cells}
+			<ContentContainer>
+				<ItemsGridContainer
+					isItemSelected={selectedItemState}
+					onClick={() => setSelectedItem(!selectedItemState)}
+				>
+					<ItemsGrid>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
+						<Item></Item>
 					</ItemsGrid>
-				</GridContainer>
-				{colsState === 9 && <PlaceHolder />}
-			</ShopContainer>
+				</ItemsGridContainer>
+				<ItemWindowContainer isItemSelected={selectedItemState}></ItemWindowContainer>
+			</ContentContainer>
 		</ScreenContainer>
 	);
 };
