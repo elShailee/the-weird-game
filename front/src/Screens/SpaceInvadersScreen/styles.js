@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { consts } from './consts';
+import { aliensGroup } from './entities';
 
 export const ScreenContainer = styled.div`
 	${({ theme }) => theme.customStyles.screenSized}
@@ -8,12 +9,21 @@ export const ScreenContainer = styled.div`
 	background-color: aquamarine;
 `;
 
-export const Ship = styled.div`
+export const ShipContainer = styled.div`
 	position: absolute;
-	bottom: 2rem;
+	bottom: 5rem;
+	left: ${({ position }) => position * consts.travelDistance + 50 + '%'};
 	transform: translateX(-50%);
-	left: ${props => props.shipPositionState * consts.travelDistance + 50 + '%'};
 `;
-Ship.defaultProps = {
-	children: `/---\\`,
+
+export const Alien = styled.div`
+	position: absolute;
+	top: 5rem;
+	left: ${({ position }) => {
+		return position * consts.travelDistance + 50 + '%';
+	}};
+	transform: translateX(-50%);
+`;
+Alien.defaultProps = {
+	children: aliensGroup.alienText,
 };

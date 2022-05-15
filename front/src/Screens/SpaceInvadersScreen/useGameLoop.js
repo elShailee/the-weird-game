@@ -1,42 +1,37 @@
 import { useEffect, useState } from 'react';
 import { consts } from './consts';
-import { canMoveLeft, canMoveRight } from './utils';
 
 export const useGameLoop = () => {
-	const [moveDirection, setMoveDirection] = useState('none');
-	const [shipPositionState, setShipPositionState] = useState(0);
+	const [tick, setTick] = useState(0);
+
 	useEffect(() => {
 		const gameLoop = setInterval(() => {
-			if (moveDirection === 'left' && canMoveLeft(shipPositionState)) {
-				setShipPositionState(shipPositionState - 1);
-			} else if (moveDirection === 'right' && canMoveRight(shipPositionState)) {
-				setShipPositionState(shipPositionState + 1);
-			}
+			setTick(tick + 1);
 		}, consts.gameLoopInterval);
 
 		return () => {
 			clearInterval(gameLoop);
 		};
-	}, [moveDirection, shipPositionState]);
+	}, [tick]);
 
-	const keyDownHandler = e => {
-		const { code: key } = e;
-		if (consts.leftMovingKeys.includes(key)) {
-			setMoveDirection('left');
-		} else if (consts.rightMovingKeys.includes(key)) {
-			setMoveDirection('right');
-		}
-		if (consts.firingKeys.includes(key)) {
-			console.log('firing');
-		}
-	};
+	// const moveShip = () => {
+	// 	if (ship.moveDirection === 'left' && ship.blockedFrom !== 'left') {
+	// 		ship.position = ship.position - 1;
+	// 	} else if (ship.moveDirection === 'right' && ship.blockedFrom !== 'right') {
+	// 		ship.position = ship.position + 1;
+	// 	}
+	// 	if (ship.position <= -46) {
+	// 		ship.blockedFrom = 'left';
+	// 	} else if (ship.position >= 46) {
+	// 		ship.blockedFrom = 'right';
+	// 	} else {
+	// 		ship.blockedFrom = null;
+	// 	}
+	// };
 
-	const keyUpHandler = e => {
-		const { code: key } = e;
-		if (consts.getMovingKeys().includes(key)) {
-			setMoveDirection(false);
-		}
-	};
+	// const moveAliens = () => {
+	// 	if (tick % consts.alienMoveTick !== 0) return;
+	// };
 
-	return { keyDownHandler, keyUpHandler, shipPositionState };
+	return { tick };
 };

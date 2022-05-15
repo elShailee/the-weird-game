@@ -7,4 +7,5 @@ export const consts = {
 	},
 	gameLoopInterval: 100,
 	travelDistance: 2,
+	alienMoveTick: 4,
 };

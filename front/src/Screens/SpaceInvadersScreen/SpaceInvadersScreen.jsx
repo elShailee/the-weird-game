@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
-import { ScreenContainer, Ship } from './styles';
+import { Ship } from './Ship';
+import { ScreenContainer } from './styles';
 import { useGameLoop } from './useGameLoop';
 
 export const SpaceInvadersScreen = () => {
@@ -11,13 +12,11 @@ export const SpaceInvadersScreen = () => {
 	}, []);
 
 	return (
-		<ScreenContainer
-			onKeyDown={gameLoop.keyDownHandler}
-			onKeyUp={gameLoop.keyUpHandler}
-			tabIndex='0'
-			ref={focusRef}
-		>
-			<Ship shipPositionState={gameLoop.shipPositionState} />
+		<ScreenContainer ref={focusRef}>
+			<Ship tick={gameLoop.tick} />
+			{/* {aliensGroup.aliens.map((alien, index) => {
+				return <Alien key={index} position={alien.position} />;
+			})} */}
 		</ScreenContainer>
 	);
 };
