@@ -5,7 +5,7 @@ export const consts = {
 	getMovingKeys: function () {
 		return this.leftMovingKeys.concat(this.rightMovingKeys);
 	},
-	gameLoopInterval: 30,
+	gameLoopInterval: 100,
 	screenEdge: 50,
 	shipSpeed: 2,
 	bulletsDelay: 2,

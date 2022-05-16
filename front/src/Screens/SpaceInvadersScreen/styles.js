@@ -25,3 +25,19 @@ export const Bullet = styled.div.attrs(props => ({
 	position: absolute;
 	transform: translateX(-50%);
 `;
+
+export const AmmoBarContainer = styled.div`
+	position: absolute;
+	background-color: rgba(255, 255, 255, 0.1);
+	bottom: 0;
+	width: 100%;
+	height: 2rem;
+`;
+
+export const AmmoBarValue = styled.div`
+	position: absolute;
+	background-color: rgba(255, 255, 255, 0.1);
+	bottom: 0;
+	width: ${({ ammoPercent }) => ammoPercent}%;
+	height: 2rem;
+`;

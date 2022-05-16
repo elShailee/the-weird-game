@@ -25,5 +25,5 @@ export const useBullets = tick => {
 		ammoRef.current -= consts.bulletsCost;
 	};
 
-	return { bulletsState, fireBulletFrom };
+	return { bulletsState, fireBulletFrom, ammoCount: ammoRef.current };
 };
