@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { Aliens } from './Aliens';
 import { consts } from './consts';
 import { Ship } from './Ship';
 import { AmmoBar, Bullet, ScreenContainer } from './styles';
@@ -27,6 +28,7 @@ export const SpaceInvadersScreen = () => {
 
 			{renderBullets}
 			<AmmoBar ammoPercent={(100 * bullets.ammoCount) / consts.bulletsMaxAmmo} />
+			<Aliens tick={gameLoop.tick} />
 		</ScreenContainer>
 	);
 };

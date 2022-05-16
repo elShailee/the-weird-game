@@ -34,3 +34,25 @@ export const AmmoBar = styled.div`
 	width: ${({ ammoPercent }) => 100 - ammoPercent}%;
 	height: 2rem;
 `;
+
+export const AliensContainer = styled.div.attrs(props => ({
+	style: {
+		top: `calc(${props.top}% + 2rem)`,
+		left: props.left + 50 + '%',
+	},
+}))`
+	${({ theme }) => theme.customStyles.centerItems}
+	position: absolute;
+	transform: translateX(-50%);
+`;
+
+export const AliensRow = styled.div`
+	display: flex;
+	flex-direction: row;
+`;
+
+export const Alien = styled.div`
+	margin: 1rem;
+	width: 4rem;
+	height: 2rem;
+`;
