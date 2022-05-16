@@ -1,15 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { consts } from './consts';
 import { ShipContainer } from './styles';
-import { useKeyboardEvents } from './useKeyboardEvents';
+import { useKeyboardController } from './useKeyboardController';
 
-export const Ship = ({ tick }) => {
-	const [position, setPosition] = useState(0);
-	useKeyboardEvents({
+export const Ship = ({ tick, fireBullet }) => {
+	const positionRef = useRef(0);
+	const blockRef = useRef({
+		right: false,
+		left: false,
+	});
+	const [lastShotTime, setLastShotTime] = useState(0);
+
+	useEffect(() => {
+		if (positionRef.current <= -consts.screenEdge) blockRef.current.left = true;
+		else blockRef.current.left = false;
+		if (positionRef.current >= consts.screenEdge) blockRef.current.right = true;
+		else blockRef.current.right = false;
+	}, [positionRef.current]); // eslint-disable-line react-hooks/exhaustive-deps
+
+	useKeyboardController({
 		tick,
 		onLeft: () => {
-			setPosition(position - 1);
+			!blockRef.current.left && (positionRef.current -= consts.shipSpeed);
+		},
+		onRight: () => {
+			!blockRef.current.right && (positionRef.current += consts.shipSpeed);
+		},
+		onFire: () => {
+			if (tick - lastShotTime >= consts.fireDelay) {
+				fireBullet(positionRef.current);
+				setLastShotTime(tick);
+			}
 		},
 	});
 
-	return <ShipContainer position={position}>/--\</ShipContainer>;
+	return <ShipContainer position={positionRef.current}>/--\</ShipContainer>;
 };

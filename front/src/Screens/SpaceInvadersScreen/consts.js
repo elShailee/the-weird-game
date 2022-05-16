@@ -6,6 +6,8 @@ export const consts = {
 		return this.leftMovingKeys.concat(this.rightMovingKeys);
 	},
 	gameLoopInterval: 100,
-	travelDistance: 2,
-	alienMoveTick: 4,
+	screenEdge: 46,
+	shipSpeed: 2,
+	fireDelay: 4,
+	bulletSpees: 2,
 };
