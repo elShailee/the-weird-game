@@ -8,6 +8,9 @@ export const consts = {
 	gameLoopInterval: 30,
 	screenEdge: 50,
 	shipSpeed: 2,
-	fireDelay: 2,
-	bulletSpees: 3,
+	bulletsDelay: 2,
+	bulletSpeed: 3,
+	bulletsCost: 8,
+	bulletsRechargeRate: 2,
+	bulletsMaxAmmo: 100,
 };

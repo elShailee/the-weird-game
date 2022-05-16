@@ -14,7 +14,7 @@ export const Ship = ({ tick, fireBulletFrom }) => {
 		onLeft: () => (positionRef.current -= consts.shipSpeed),
 		onRight: () => (positionRef.current += consts.shipSpeed),
 		onFire: () => {
-			if (tick - lastShotTime >= consts.fireDelay) {
+			if (tick - lastShotTime >= consts.bulletsDelay) {
 				fireBulletFrom(positionRef.current);
 				setLastShotTime(tick);
 			}
