@@ -5,27 +5,14 @@ import { useKeyboardController } from './useKeyboardController';
 
 export const Ship = ({ tick, fireBulletFrom }) => {
 	const positionRef = useRef(0);
-	const blockRef = useRef({
-		right: false,
-		left: false,
-	});
 	const [lastShotTime, setLastShotTime] = useState(0);
 
-	useEffect(() => {
-		if (positionRef.current <= -consts.screenEdge) blockRef.current.left = true;
-		else blockRef.current.left = false;
-		if (positionRef.current >= consts.screenEdge) blockRef.current.right = true;
-		else blockRef.current.right = false;
-	}, [positionRef.current]); // eslint-disable-line react-hooks/exhaustive-deps
+	useShipTeleportOnEdge(positionRef);
 
 	useKeyboardController({
 		tick,
-		onLeft: () => {
-			!blockRef.current.left && (positionRef.current -= consts.shipSpeed);
-		},
-		onRight: () => {
-			!blockRef.current.right && (positionRef.current += consts.shipSpeed);
-		},
+		onLeft: () => (positionRef.current -= consts.shipSpeed),
+		onRight: () => (positionRef.current += consts.shipSpeed),
 		onFire: () => {
 			if (tick - lastShotTime >= consts.fireDelay) {
 				fireBulletFrom(positionRef.current);
@@ -34,5 +21,16 @@ export const Ship = ({ tick, fireBulletFrom }) => {
 		},
 	});
 
-	return <ShipContainer position={positionRef.current}>/--\</ShipContainer>;
+	return <ShipContainer position={positionRef.current}>/---\</ShipContainer>;
+};
+
+const useShipTeleportOnEdge = positionRef => {
+	useEffect(() => {
+		if (positionRef.current < -consts.screenEdge) {
+			positionRef.current = consts.screenEdge;
+		}
+		if (positionRef.current > consts.screenEdge) {
+			positionRef.current = -consts.screenEdge;
+		}
+	}, [positionRef.current]); // eslint-disable-line react-hooks/exhaustive-deps
 };

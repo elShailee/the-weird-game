@@ -122,6 +122,10 @@ export const theme = {
 				BG: palette.purple[400],
 			},
 		},
+		SpaceInvadersScreen: {
+			BG: palette.gray[200],
+			text: palette.gray[700],
+		},
 		navbar: {
 			BG: palette.gray[502],
 			buttonsBG: palette.gray[503],
