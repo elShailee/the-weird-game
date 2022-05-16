@@ -28,7 +28,7 @@ export const SpaceInvadersScreen = () => {
 
 			{renderBullets}
 			<AmmoBar ammoPercent={(100 * bullets.ammoCount) / consts.bulletsMaxAmmo} />
-			<Aliens tick={gameLoop.tick} />
+			<Aliens tick={gameLoop.tick} bulletsPosArray={bullets.bulletsState} />
 		</ScreenContainer>
 	);
 };

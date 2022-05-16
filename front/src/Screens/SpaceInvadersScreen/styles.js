@@ -23,7 +23,7 @@ export const Bullet = styled.div.attrs(props => ({
 	},
 }))`
 	position: absolute;
-	transform: translateX(-50%);
+	transform: translateX(-50%) translateY(50%);
 `;
 
 export const AmmoBar = styled.div`
@@ -37,11 +37,12 @@ export const AmmoBar = styled.div`
 
 export const AliensContainer = styled.div.attrs(props => ({
 	style: {
-		top: `calc(${props.top}% + 2rem)`,
+		bottom: `calc(${props.top}% + 6rem)`,
 		left: props.left + 50 + '%',
 	},
 }))`
 	${({ theme }) => theme.customStyles.centerItems}
+	flex-direction: column-reverse;
 	position: absolute;
 	transform: translateX(-50%);
 `;
@@ -52,7 +53,8 @@ export const AliensRow = styled.div`
 `;
 
 export const Alien = styled.div`
-	margin: 1rem;
-	width: 4rem;
+	margin: 1% 1vw;
+	width: ${({ width }) => width}vw;
 	height: 2rem;
+	transform: translateX(50%);
 `;
