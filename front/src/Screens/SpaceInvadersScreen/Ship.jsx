@@ -3,7 +3,7 @@ import { consts } from './consts';
 import { ShipContainer } from './styles';
 import { useKeyboardController } from './useKeyboardController';
 
-export const Ship = ({ tick, fireBullet }) => {
+export const Ship = ({ tick, fireBulletFrom }) => {
 	const positionRef = useRef(0);
 	const blockRef = useRef({
 		right: false,
@@ -28,7 +28,7 @@ export const Ship = ({ tick, fireBullet }) => {
 		},
 		onFire: () => {
 			if (tick - lastShotTime >= consts.fireDelay) {
-				fireBullet(positionRef.current);
+				fireBulletFrom(positionRef.current);
 				setLastShotTime(tick);
 			}
 		},
