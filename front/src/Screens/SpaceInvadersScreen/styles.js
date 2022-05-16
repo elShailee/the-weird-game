@@ -10,7 +10,7 @@ export const ScreenContainer = styled.div`
 
 export const ShipContainer = styled.div`
 	position: absolute;
-	bottom: 5rem;
+	bottom: 3rem;
 	left: ${({ position }) => position + 50 + '%'};
 	transform: translateX(-50%);
 	width: fit-content;
