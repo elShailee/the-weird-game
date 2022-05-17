@@ -28,11 +28,10 @@ export const Aliens = ({ tick, bulletsPosArray }) => {
 					if (
 						Math.abs(
 							bullet.x -
-								2 -
 								(alienIndex - (row.length - 1) / 2) * (consts.aliensWidth + 1) -
 								positionRef.current.x,
 						) <= 3 &&
-						Math.abs(bullet.y - consts.bulletSpeed / 2 - positionRef.current.y - rowIndex) <= 2 &&
+						Math.abs(bullet.y - consts.bulletSpeed / 2 - positionRef.current.y - rowIndex) <= 1.5 &&
 						alien === 1
 					) {
 						didHit = true;
@@ -60,7 +59,7 @@ export const Aliens = ({ tick, bulletsPosArray }) => {
 						}
 						return (
 							<Alien key={alienIndex} width={consts.aliensWidth}>
-								{alien === 1 ? '|---|' : ''}
+								{alien === 1 ? '(---)' : ''}
 							</Alien>
 						);
 					})}

@@ -17,7 +17,7 @@ export const useBullets = tick => {
 	useEffect(() => {
 		if (ammoRef.current < consts.bulletsMaxAmmo) {
 			ammoRef.current += consts.bulletsRechargeRate;
-			if (ammoRef.current === consts.bulletsMaxAmmo) {
+			if (ammoRef.current >= consts.bulletsMaxAmmo) {
 				setIsCooling(false);
 			}
 		}

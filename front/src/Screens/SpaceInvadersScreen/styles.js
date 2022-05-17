@@ -56,5 +56,4 @@ export const Alien = styled.div`
 	margin: 1% 1vw;
 	width: ${({ width }) => width}vw;
 	height: 2rem;
-	transform: translateX(50%);
 `;
