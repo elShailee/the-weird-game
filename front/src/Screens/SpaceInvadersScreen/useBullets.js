@@ -1,37 +1,37 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { consts } from './consts';
 
-export const useBullets = tick => {
-	const [bulletsState, setBulletsState] = useState([]);
-	const ammoRef = useRef(consts.bulletsMaxAmmo);
+export const useBullets = ({ tick, level }) => {
+	const bulletsPosArray = useMemo(() => [], []);
+	const ammoRef = useRef(consts.bulletsMaxAmmo[level]);
 	const [isCooling, setIsCooling] = useState(false);
 
 	useEffect(() => {
-		bulletsState.forEach((bullet, index) => {
-			bullet.y += consts.bulletSpeed;
+		bulletsPosArray.forEach((bullet, index) => {
+			bullet.y += consts.bulletSpeed[level];
 			const maxBulletHightByPercent = 100;
-			if (bullet.y > maxBulletHightByPercent) bulletsState.splice(index, 1);
+			if (bullet.y > maxBulletHightByPercent) bulletsPosArray.splice(index, 1);
 		});
-	}, [bulletsState, tick]);
+	}, [bulletsPosArray, tick, level]);
 
 	useEffect(() => {
-		if (ammoRef.current < consts.bulletsMaxAmmo) {
-			ammoRef.current += consts.bulletsRechargeRate;
-			if (ammoRef.current >= consts.bulletsMaxAmmo) {
+		if (ammoRef.current < consts.bulletsMaxAmmo[level]) {
+			ammoRef.current += consts.bulletsRechargeRate[level];
+			if (ammoRef.current >= consts.bulletsMaxAmmo[level]) {
 				setIsCooling(false);
 			}
 		}
-	}, [tick]);
+	}, [tick, level]);
 
 	const fireBulletFrom = xPosition => {
-		if (ammoRef.current < consts.bulletsCost) {
+		if (ammoRef.current < consts.bulletsCost[level]) {
 			return setIsCooling(true);
 		}
 		if (isCooling) return;
 
-		setBulletsState([...bulletsState, { x: xPosition, y: 0 }]);
-		ammoRef.current -= consts.bulletsCost;
+		bulletsPosArray.push({ x: xPosition, y: 0 });
+		ammoRef.current -= consts.bulletsCost[level];
 	};
 
-	return { bulletsState, fireBulletFrom, ammoCount: ammoRef.current, isCooling };
+	return { bulletsPosArray, fireBulletFrom, ammoCount: ammoRef.current, isCooling };
 };

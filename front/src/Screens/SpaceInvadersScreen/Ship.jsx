@@ -1,22 +1,23 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { consts } from './consts';
 import { ShipContainer } from './styles';
 import { useKeyboardController } from './useKeyboardController';
 
-export const Ship = ({ tick, fireBulletFrom }) => {
+export const Ship = ({ tick, fireBulletFrom, level }) => {
 	const positionRef = useRef(0);
-	const [lastShotTime, setLastShotTime] = useState(0);
+	// const [lastShotTime, setLastShotTime] = useState(0);
+	let lastShotTime = useRef(0);
 
 	useShipTeleportOnEdge(positionRef);
 
 	useKeyboardController({
 		tick,
-		onLeft: () => (positionRef.current -= consts.shipSpeed),
-		onRight: () => (positionRef.current += consts.shipSpeed),
+		onLeft: () => (positionRef.current -= consts.shipSpeed[level]),
+		onRight: () => (positionRef.current += consts.shipSpeed[level]),
 		onFire: () => {
-			if (tick - lastShotTime >= consts.bulletsDelay) {
+			if (tick - lastShotTime.current >= consts.bulletsDelay[level]) {
 				fireBulletFrom(positionRef.current);
-				setLastShotTime(tick);
+				lastShotTime.current = tick;
 			}
 		},
 	});
@@ -32,5 +33,5 @@ const useShipTeleportOnEdge = positionRef => {
 		if (positionRef.current > consts.screenEdge) {
 			positionRef.current = -consts.screenEdge;
 		}
-	}, [positionRef.current]); // eslint-disable-line react-hooks/exhaustive-deps
+	}, [positionRef]);
 };

@@ -26,34 +26,27 @@ export const Bullet = styled.div.attrs(props => ({
 	transform: translateX(-50%) translateY(50%);
 `;
 
-export const AmmoBar = styled.div`
+export const AmmoBar = styled.div.attrs(({ ammoPercent }) => ({
+	style: {
+		width: `${100 - ammoPercent}%`,
+	},
+}))`
 	position: absolute;
 	background-color: rgba(255, 255, 255, 0.1);
 	bottom: 0;
 	left: 0;
-	width: ${({ ammoPercent }) => 100 - ammoPercent}%;
 	height: 2rem;
 `;
 
-export const AliensContainer = styled.div.attrs(props => ({
+export const Alien = styled.div.attrs(({ size, pos }) => ({
 	style: {
-		bottom: `calc(${props.top}% + 6rem)`,
-		left: props.left + 50 + '%',
+		width: `${size.x}%`,
+		height: `${size.y}%`,
+
+		bottom: `calc(${pos.y}% + 6rem)`,
+		left: `calc(${pos.x}% + 50%)`,
 	},
 }))`
-	${({ theme }) => theme.customStyles.centerItems}
-	flex-direction: column-reverse;
 	position: absolute;
 	transform: translateX(-50%);
-`;
-
-export const AliensRow = styled.div`
-	display: flex;
-	flex-direction: row;
-`;
-
-export const Alien = styled.div`
-	margin: 1% 1vw;
-	width: ${({ width }) => width}vw;
-	height: 2rem;
 `;
