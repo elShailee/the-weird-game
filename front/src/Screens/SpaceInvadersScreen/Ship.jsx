@@ -9,7 +9,6 @@ export const Ship = ({ tick, fireBulletFrom, level }) => {
 	let lastShotTime = useRef(0);
 
 	useShipTeleportOnEdge(positionRef);
-
 	useKeyboardController({
 		tick,
 		onLeft: () => (positionRef.current -= consts.shipSpeed[level]),
@@ -33,5 +32,5 @@ const useShipTeleportOnEdge = positionRef => {
 		if (positionRef.current > consts.screenEdge) {
 			positionRef.current = -consts.screenEdge;
 		}
-	}, [positionRef]);
+	}, [positionRef.current]); // eslint-disable-line react-hooks/exhaustive-deps
 };

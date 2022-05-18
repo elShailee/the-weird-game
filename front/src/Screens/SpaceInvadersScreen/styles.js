@@ -35,7 +35,7 @@ export const AmmoBar = styled.div.attrs(({ ammoPercent }) => ({
 	background-color: rgba(255, 255, 255, 0.1);
 	bottom: 0;
 	left: 0;
-	height: 2rem;
+	height: 1rem;
 `;
 
 export const Alien = styled.div.attrs(({ size, pos }) => ({
