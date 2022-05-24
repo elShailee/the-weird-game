@@ -1,6 +1,7 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useMemo } from 'react';
 import { Aliens } from './Aliens';
 import { consts } from './consts';
+import { getLevelBynum } from './levels';
 import { Ship } from './Ship';
 import { AmmoBar, Bullet, ScreenContainer } from './styles';
 import { useBullets } from './useBullets';
@@ -8,12 +9,13 @@ import { useGameLoop } from './useGameLoop';
 
 export const SpaceInvadersScreen = () => {
 	const focusRef = useRef();
-	const [levelNumState, setLevelNumState] = useState(consts.startingLevel);
-	const gameLoop = useGameLoop(levelNumState);
-	const bullets = useBullets({ tick: gameLoop.tick, level: levelNumState });
+	const startingLevel = useMemo(() => getLevelBynum(consts.startingLevel), []);
+	const [levelState, setLevelState] = useState(startingLevel);
+	const gameLoop = useGameLoop(levelState.gameLoopInterval);
+	const bullets = useBullets({ tick: gameLoop.tick, level: levelState });
 
 	const skipLevel = () => {
-		setLevelNumState(levelNumState + 1);
+		setLevelState(getLevelBynum(levelState.num + 1));
 	};
 
 	useEffect(() => {
@@ -30,14 +32,14 @@ export const SpaceInvadersScreen = () => {
 
 	return (
 		<ScreenContainer ref={focusRef}>
-			<Ship tick={gameLoop.tick} fireBulletFrom={bullets.fireBulletFrom} level={levelNumState} />
+			<Ship tick={gameLoop.tick} fireBulletFrom={bullets.fireBulletFrom} level={levelState} />
 
 			{renderBullets}
-			<AmmoBar ammoPercent={(100 * bullets.ammoCount) / consts.bulletsMaxAmmo[levelNumState]} />
+			<AmmoBar ammoPercent={(100 * bullets.ammoCount) / levelState.bulletsMaxAmmo} />
 			<Aliens
 				tick={gameLoop.tick}
 				bulletsPosArray={bullets.bulletsPosArray}
-				level={levelNumState}
+				level={levelState}
 				skipLevel={skipLevel}
 			/>
 		</ScreenContainer>

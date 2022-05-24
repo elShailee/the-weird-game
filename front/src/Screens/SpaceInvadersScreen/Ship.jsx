@@ -11,10 +11,10 @@ export const Ship = ({ tick, fireBulletFrom, level }) => {
 	useShipTeleportOnEdge(positionRef);
 	useKeyboardController({
 		tick,
-		onLeft: () => (positionRef.current -= consts.shipSpeed[level]),
-		onRight: () => (positionRef.current += consts.shipSpeed[level]),
+		onLeft: () => (positionRef.current -= level.shipSpeed),
+		onRight: () => (positionRef.current += level.shipSpeed),
 		onFire: () => {
-			if (tick - lastShotTime.current >= consts.bulletsDelay[level]) {
+			if (tick - lastShotTime.current >= level.bulletsDelay) {
 				fireBulletFrom(positionRef.current);
 				lastShotTime.current = tick;
 			}
