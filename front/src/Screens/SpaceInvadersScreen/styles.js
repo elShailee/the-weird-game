@@ -10,7 +10,7 @@ export const ScreenContainer = styled.div`
 
 export const ShipContainer = styled.div`
 	position: absolute;
-	bottom: 3rem;
+	bottom: 3vh;
 	left: ${({ position }) => position + 50 + '%'};
 	transform: translateX(-50%);
 	width: fit-content;
@@ -18,12 +18,12 @@ export const ShipContainer = styled.div`
 
 export const Bullet = styled.div.attrs(props => ({
 	style: {
-		bottom: `calc(${props.position.y}% + 6rem)`,
+		bottom: `calc(${props.position.y}% + 6vh)`,
 		left: props.position.x + 50 + '%',
 	},
 }))`
 	position: absolute;
-	transform: translateX(-50%) translateY(50%);
+	transform: translateX(-50%) translateY(100%);
 `;
 
 export const AmmoBar = styled.div.attrs(({ ammoPercent }) => ({
@@ -42,8 +42,9 @@ export const Alien = styled.div.attrs(({ size, pos }) => ({
 	style: {
 		width: `${size.x}%`,
 		height: `${size.y}%`,
+		fontSize: `${size.y / 1.75}vh`,
 
-		bottom: `calc(${pos.y}% + 6rem)`,
+		bottom: `calc(${pos.y}% + 3vh)`,
 		left: `calc(${pos.x}% + 50%)`,
 	},
 }))`

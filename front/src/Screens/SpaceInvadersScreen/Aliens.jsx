@@ -5,7 +5,7 @@ import { Alien } from './styles';
 const aliensSkinsByHealth = {
 	0: '',
 	1: '(---)',
-	2: '|---|',
+	2: '/---/',
 	3: '<--->',
 };
 
@@ -16,7 +16,7 @@ const getAliensPosition = level => {
 			return {
 				health: cel,
 				x: level.aliensSize.x * (celIndex - (row.length - 1) / 2),
-				y: level.aliensSize.y * (aliens.length - 1 - rowIndex) + 60,
+				y: level.aliensSize.y * (aliens.length - 1 - rowIndex) + 70,
 			};
 		});
 	});
@@ -61,6 +61,7 @@ export const Aliens = ({ tick, bulletsPosArray, level, skipLevel }) => {
 			aliensPositions.forEach(row =>
 				row.forEach(alien => {
 					alien.y -= level.aliensSpeed.y;
+					if (alien.y <= -9) console.log('lost');
 				}),
 			);
 		}

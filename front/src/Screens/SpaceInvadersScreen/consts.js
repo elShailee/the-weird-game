@@ -9,5 +9,5 @@ export const consts = {
 	levelSwitchDelay: 2000,
 	screenRadius: 50,
 	aliensTravelDistance: 45,
-	aimAssist: 1.5,
+	aimAssist: 1.75,
 };
