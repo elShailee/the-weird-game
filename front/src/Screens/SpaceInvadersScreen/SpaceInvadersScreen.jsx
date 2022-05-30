@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState, useMemo } from 'react';
 import { Aliens } from './Aliens';
 import { consts } from './consts';
-import { getLevelBynum } from './levels';
+import { getLevelByNum } from './levels';
 import { Ship } from './Ship';
 import { AmmoBar, Bullet, ScreenContainer } from './styles';
 import { useBullets } from './useBullets';
@@ -9,13 +9,13 @@ import { useGameLoop } from './useGameLoop';
 
 export const SpaceInvadersScreen = () => {
 	const focusRef = useRef();
-	const startingLevel = useMemo(() => getLevelBynum(consts.startingLevel), []);
+	const startingLevel = useMemo(() => getLevelByNum(consts.startingLevel), []);
 	const [levelState, setLevelState] = useState(startingLevel);
 	const gameLoop = useGameLoop(levelState.gameLoopInterval);
 	const bullets = useBullets({ tick: gameLoop.tick, level: levelState });
 
 	const skipLevel = () => {
-		setLevelState(getLevelBynum(levelState.num + 1));
+		setLevelState(getLevelByNum(levelState.num + 1));
 	};
 
 	useEffect(() => {

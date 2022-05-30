@@ -5,7 +5,6 @@ import { useKeyboardController } from './useKeyboardController';
 
 export const Ship = ({ tick, fireBulletFrom, level }) => {
 	const positionRef = useRef(0);
-	// const [lastShotTime, setLastShotTime] = useState(0);
 	let lastShotTime = useRef(0);
 
 	useShipTeleportOnEdge(positionRef);
@@ -26,11 +25,12 @@ export const Ship = ({ tick, fireBulletFrom, level }) => {
 
 const useShipTeleportOnEdge = positionRef => {
 	useEffect(() => {
-		if (positionRef.current < -consts.screenEdge) {
-			positionRef.current = consts.screenEdge;
+		const { screenRadius } = consts;
+		if (positionRef.current < -screenRadius) {
+			positionRef.current = screenRadius;
 		}
-		if (positionRef.current > consts.screenEdge) {
-			positionRef.current = -consts.screenEdge;
+		if (positionRef.current > screenRadius) {
+			positionRef.current = -screenRadius;
 		}
 	}, [positionRef.current]); // eslint-disable-line react-hooks/exhaustive-deps
 };

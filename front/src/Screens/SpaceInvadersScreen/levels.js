@@ -120,7 +120,7 @@ const levelsScalings = {
 	},
 };
 
-export const getLevelBynum = levelNum => {
+export const getLevelByNum = levelNum => {
 	const levelObject = {};
 	Object.entries(levelsScalings).forEach(entrie => {
 		const attribute = entrie[0];
