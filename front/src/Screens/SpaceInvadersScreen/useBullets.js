@@ -23,10 +23,13 @@ export const useBullets = ({ tick, level }) => {
 	}, [tick, level]);
 
 	const fireBulletFrom = xPosition => {
-		if (ammoRef.current < level.bulletsCost) {
+		const canAffordToFire = ammoRef.current >= level.bulletsCost;
+
+		if (level.reloadCooling && !canAffordToFire) {
 			return setIsCooling(true);
 		}
-		if (isCooling) return;
+
+		if (isCooling || !canAffordToFire) return;
 
 		bulletsPosArray.push({ x: xPosition, y: 0 });
 		ammoRef.current -= level.bulletsCost;

@@ -23,6 +23,14 @@ const levelsScalings = {
 		5: 2,
 		6: 2,
 	},
+	reloadCooling: {
+		1: false,
+		2: false,
+		3: false,
+		4: true,
+		5: true,
+		6: true,
+	},
 	bulletsDelay: {
 		1: 3,
 		2: 3,
