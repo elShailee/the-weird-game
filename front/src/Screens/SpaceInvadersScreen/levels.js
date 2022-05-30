@@ -113,6 +113,7 @@ const levelsScalings = {
 };
 
 export const getLevelByNum = levelNum => {
+	if (!levelsScalings.levelNum[levelNum]) return null;
 	const levelObject = {};
 	Object.entries(levelsScalings).forEach(entrie => {
 		const attribute = entrie[0];

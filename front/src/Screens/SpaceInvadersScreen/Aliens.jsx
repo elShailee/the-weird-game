@@ -22,7 +22,7 @@ const getAliensPosition = level => {
 	});
 };
 
-export const Aliens = ({ tick, bulletsPosArray, level, skipLevel }) => {
+export const Aliens = ({ tick, bulletsPosArray, level, skipLevel, scoreRef, handleGameEnd }) => {
 	const aliensPositions = useMemo(() => getAliensPosition(level), [level]);
 	const directionRef = useRef('left');
 
@@ -40,6 +40,7 @@ export const Aliens = ({ tick, bulletsPosArray, level, skipLevel }) => {
 					) {
 						alien.health--;
 						bulletsPosArray.splice(bulletIndex, 1);
+						scoreRef.current++;
 					}
 				});
 
@@ -61,7 +62,9 @@ export const Aliens = ({ tick, bulletsPosArray, level, skipLevel }) => {
 			aliensPositions.forEach(row =>
 				row.forEach(alien => {
 					alien.y -= level.aliensSpeed.y;
-					if (alien.y <= -9) console.log('lost');
+					if (alien.y <= -9) {
+						handleGameEnd();
+					}
 				}),
 			);
 		}
@@ -69,7 +72,7 @@ export const Aliens = ({ tick, bulletsPosArray, level, skipLevel }) => {
 		if (isLevelDefeated) {
 			skipLevel();
 		}
-	}, [tick, bulletsPosArray, aliensPositions, level, skipLevel]);
+	}, [tick, bulletsPosArray, aliensPositions, level, skipLevel, scoreRef, handleGameEnd]);
 
 	const renderAliens = useMemo(
 		() => {
