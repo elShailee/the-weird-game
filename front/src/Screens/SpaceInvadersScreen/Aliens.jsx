@@ -2,13 +2,20 @@ import React, { useEffect, useMemo, useRef } from 'react';
 import { consts } from './consts';
 import { Alien } from './styles';
 
+const aliensSkinsByHealth = {
+	0: '',
+	1: '(---)',
+	2: '|---|',
+	3: '<--->',
+};
+
 const getAliensPosition = level => {
 	const aliens = level.aliens;
 	return aliens.map((row, rowIndex) => {
-		return row.map((col, colIndex) => {
+		return row.map((cel, celIndex) => {
 			return {
-				isAlive: true,
-				x: level.aliensSize.x * (colIndex - (row.length - 1) / 2),
+				health: cel,
+				x: level.aliensSize.x * (celIndex - (row.length - 1) / 2),
 				y: level.aliensSize.y * (aliens.length - 1 - rowIndex) + 60,
 			};
 		});
@@ -29,9 +36,9 @@ export const Aliens = ({ tick, bulletsPosArray, level, skipLevel }) => {
 					if (
 						Math.abs(alien.x - bulletPos.x) <= consts.aimAssist &&
 						Math.abs(alien.y - bulletPos.y) <= consts.aimAssist &&
-						alien.isAlive
+						alien.health > 0
 					) {
-						alien.isAlive = false;
+						alien.health--;
 						bulletsPosArray.splice(bulletIndex, 1);
 					}
 				});
@@ -43,7 +50,7 @@ export const Aliens = ({ tick, bulletsPosArray, level, skipLevel }) => {
 				}
 
 				// level advance check
-				if (alien.isAlive) {
+				if (alien.health > 0) {
 					isLevelDefeated = false;
 				}
 			});
@@ -69,7 +76,7 @@ export const Aliens = ({ tick, bulletsPosArray, level, skipLevel }) => {
 				return row.map((alienPos, alienIndex) => {
 					return (
 						<Alien key={alienIndex} size={level.aliensSize} pos={alienPos}>
-							{alienPos.isAlive ? '(---)' : ''}
+							{aliensSkinsByHealth[alienPos.health]}
 						</Alien>
 					);
 				});
