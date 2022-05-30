@@ -50,3 +50,14 @@ export const Alien = styled.div.attrs(({ size, pos }) => ({
 	position: absolute;
 	transform: translateX(-50%);
 `;
+
+export const LevelNumDisplay = styled.div`
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: ${({ theme }) => theme.sizes.text.XL};
+	color: ${({ theme }) => theme.colors.SpaceInvadersScreen.text};
+	opacity: ${({ isShown }) => (isShown ? 1 : 0)};
+	transition: opacity 0.5s;
+`;

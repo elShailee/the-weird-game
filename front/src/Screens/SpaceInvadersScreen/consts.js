@@ -6,6 +6,7 @@ export const consts = {
 		return this.leftMovingKeys.concat(this.rightMovingKeys);
 	},
 	startingLevel: 1,
+	levelSwitchDelay: 2000,
 	screenRadius: 50,
 	aliensTravelDistance: 45,
 	aimAssist: 1.5,

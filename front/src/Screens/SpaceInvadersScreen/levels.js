@@ -1,5 +1,5 @@
 const levelsScalings = {
-	num: {
+	levelNum: {
 		1: 1,
 		2: 2,
 		3: 3,
@@ -127,6 +127,5 @@ export const getLevelByNum = levelNum => {
 		const scales = entrie[1];
 		levelObject[attribute] = scales[levelNum];
 	});
-	console.log(levelObject);
 	return levelObject;
 };
